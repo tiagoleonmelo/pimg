@@ -36,6 +36,8 @@ DynamicMatrix * LoadFromFile(char *);
 
 void SaveOnFile(DynamicMatrix *v, char *name);
 
+void PrintMat(DynamicMatrix * dm);
+
 #endif //INC_00_FORMATS_H
 
 // Move these to a different module
@@ -50,7 +52,6 @@ void SaveOnFile(DynamicMatrix *v, char *name);
 // typedef struct{
 //     int height;
 //     int length;
-//     RGB matrix[0][0];    // Starting our matrix with dummy values
-//                             // memory will be allocated later
+//     RGB matrix[0][0]; 
 // } Imagem;
 

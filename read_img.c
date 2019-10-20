@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "formats.h"
-#include "dynamic_mat.c"
 
 // int main(void)
 // {
@@ -29,6 +28,6 @@
 int main(void)
 {   
     DynamicMatrix *dm = LoadFromFile("lena.ppm");
-
+    PrintMat(dm);
     return 0;
 }

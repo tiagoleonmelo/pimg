@@ -37,10 +37,26 @@ DynamicMatrix * CreateMat(int rows, int cols)
 DynamicMatrix * LoadFromFile(char *name)
 {
     FILE *fp = fopen(name, "rb");
+    char buff[16];
+    
+    //read image format
+    if (!fgets(buff, sizeof(buff), fp)) {
+        exit(1);
+    }
 
-    int x, y;
-    fread(&x, sizeof(int), 1, fp);
-    fread(&y, sizeof(int), 1, fp);
+    //check the image format
+    if (buff[0] != 'P' || buff[1] != '6') {
+         fprintf(stderr, "Invalid image format (must be 'P6')\n");
+         exit(1);
+    }
+
+    int x, y, max_bright;
+    
+    fscanf(fp, "%d", &x);
+    fscanf(fp, "%d", &y);
+    fscanf(fp, "%d", &max_bright);
+
+    printf("%d %d\n", x, y);
 
     DynamicMatrix *tmp = CreateMat(x, y);
     fread(tmp->a, sizeof(int), tmp->size, fp);
@@ -56,4 +72,15 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
     fwrite(&(dm->n), sizeof(int), 1, fp);
 
     fwrite(dm->a, sizeof(int), dm->n, fp);
+}
+
+void PrintMat(DynamicMatrix *dm)
+{
+
+    for(int i = 0; i <= dm->size; i++){
+        printf("%d ", dm->a + i);
+    }
+
+    // printf("\n");
+
 }
