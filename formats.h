@@ -24,7 +24,7 @@ typedef struct{
  * 
  */
 typedef struct {
-    int **a;
+    RGBPx *data;
     int n;
     int x, y;
     int size;
@@ -37,6 +37,8 @@ DynamicMatrix * LoadFromFile(char *);
 void SaveOnFile(DynamicMatrix *v, char *name);
 
 void PrintMat(DynamicMatrix * dm);
+
+void PrintRGBPx(RGBPx * px);
 
 #endif //INC_00_FORMATS_H
 

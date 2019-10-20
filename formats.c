@@ -29,7 +29,7 @@ DynamicMatrix * CreateMat(int rows, int cols)
     
     tmp->size = rows*cols;
 
-    tmp->a = (int **)calloc(tmp->size, sizeof(int));
+    tmp->data = (RGBPx *)calloc(tmp->size, sizeof(int));
 
     return tmp;
 }
@@ -59,7 +59,7 @@ DynamicMatrix * LoadFromFile(char *name)
     printf("%d %d\n", x, y);
 
     DynamicMatrix *tmp = CreateMat(x, y);
-    fread(tmp->a, sizeof(int), tmp->size, fp);
+    fread(tmp->data, 3 * tmp->x, tmp->y, fp);
 
     return tmp;
 }
@@ -68,19 +68,26 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
 {
     FILE *fp = fopen(name, "wb");
 
-    int n;
     fwrite(&(dm->n), sizeof(int), 1, fp);
 
-    fwrite(dm->a, sizeof(int), dm->n, fp);
+    fwrite(dm->data, sizeof(int), dm->n, fp);
 }
 
 void PrintMat(DynamicMatrix *dm)
 {
 
+    RGBPx * array_ptr = dm->data;
+
     for(int i = 0; i <= dm->size; i++){
-        printf("%d ", dm->a + i);
+        PrintRGBPx(array_ptr);
+        array_ptr++;
     }
 
-    // printf("\n");
+    printf("\n");
+}
+
+void PrintRGBPx(RGBPx *px){
+
+    printf("[ %d, %d, %d ]", px->r, px->g, px->b);
 
 }
