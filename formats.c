@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 
-DynamicMatrix * CreateMat(int rows, int cols)
+DynamicMatrix * CreateMat(int rows, int cols, int max_bright)
 {
     DynamicMatrix *tmp;
 
@@ -29,6 +29,8 @@ DynamicMatrix * CreateMat(int rows, int cols)
     
     tmp->size = rows*cols;
 
+    tmp->max_bright = max_bright;
+
     tmp->data = (RGBPx *)calloc(tmp->size, sizeof(int));
 
     return tmp;
@@ -39,12 +41,12 @@ DynamicMatrix * LoadFromFile(char *name)
     FILE *fp = fopen(name, "rb");
     char buff[16];
     
-    //read image format
+    // Reading the image format
     if (!fgets(buff, sizeof(buff), fp)) {
         exit(1);
     }
 
-    //check the image format
+    // Checking the image format
     if (buff[0] != 'P' || buff[1] != '6') {
          fprintf(stderr, "Invalid image format (must be 'P6')\n");
          exit(1);
@@ -58,7 +60,7 @@ DynamicMatrix * LoadFromFile(char *name)
 
     printf("%d %d\n", x, y);
 
-    DynamicMatrix *tmp = CreateMat(x, y);
+    DynamicMatrix *tmp = CreateMat(x, y, max_bright);
     fread(tmp->data, 3 * tmp->x, tmp->y, fp);
 
     return tmp;
@@ -68,9 +70,15 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
 {
     FILE *fp = fopen(name, "wb");
 
-    fwrite(&(dm->n), sizeof(int), 1, fp);
+    // Writing the image format
+    fprintf(fp, "P6\n");
 
-    fwrite(dm->data, sizeof(int), dm->n, fp);
+    // Writing rows, columns and maximum brightness
+    fprintf(fp, "%d %d\n", dm->x, dm->y);
+    fprintf(fp, "%d", dm->max_bright);
+
+    // Writing data
+    fwrite(dm->data, 3 * dm->x, dm->y, fp);
 }
 
 void PrintMat(DynamicMatrix *dm)

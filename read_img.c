@@ -7,5 +7,6 @@ int main(void)
 {   
     DynamicMatrix *dm = LoadFromFile("lena.ppm");
     PrintMat(dm);
+    SaveOnFile(dm, "saved_lena.ppm");
     return 0;
 }
