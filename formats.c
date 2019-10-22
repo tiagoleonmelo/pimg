@@ -9,6 +9,8 @@
  * There will also be the options of manipulating an image, but at the time of writing
  * that is just TODO
  * 
+ * Also TODO: Split the contents of this file into different headers
+ * 
  * @param Authors João Nogueira, Tiago Melo
  * 
  */
@@ -17,6 +19,12 @@
 #include <stdio.h>
 
 
+
+/**
+ * 
+ * Create a RGB Matrix
+ * 
+ */
 DynamicMatrix * CreateMat(int rows, int cols, int max_bright)
 {
     DynamicMatrix *tmp;
@@ -36,6 +44,12 @@ DynamicMatrix * CreateMat(int rows, int cols, int max_bright)
     return tmp;
 }
 
+
+/**
+ * 
+ * Load a RGB Matrix from file called name
+ * 
+ */
 DynamicMatrix * LoadFromFile(char *name)
 {
     FILE *fp = fopen(name, "rb");
@@ -65,6 +79,12 @@ DynamicMatrix * LoadFromFile(char *name)
     return tmp;
 }
 
+
+/**
+ * 
+ * Save a RGB Matrix dm to file called name
+ * 
+ */
 void SaveOnFile(DynamicMatrix *dm, char *name)
 {
     FILE *fp = fopen(name, "wb");
@@ -80,6 +100,12 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
     fwrite(dm->data, 3 * dm->x, dm->y, fp);
 }
 
+
+/**
+ * 
+ * Print a RGB Matrix dm on the console
+ * 
+ */
 void PrintMat(DynamicMatrix *dm)
 {
 
@@ -93,15 +119,26 @@ void PrintMat(DynamicMatrix *dm)
     printf("\n");
 }
 
-RGBPx * GetPxAt(DynamicMatrix *dm, int index){ // Not working?
-    return &(dm->data[index]);
-}
 
+/**
+ * 
+ * Print a RGB Pixel in the form [R, G, B]
+ * 
+ */
 void PrintRGBPx(RGBPx *px){
     printf("[ %d, %d, %d ]", px->r, px->g, px->b);
 }
 
 
+/**
+ * 
+ * Function that converts an RGB Matrix dm to a Greyscale matrix
+ * and returns it.
+ * 
+ * Essentially, it iterates through the RGB data, converts it and stores it in
+ * a buffer. This buffer is then used as the new Greyscale Matrix's data.
+ * 
+ */
 GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm){
 
     GreyMatrix * ret = CreateGreyMat(dm->x, dm->y);
@@ -128,6 +165,11 @@ GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm){
 }
 
 
+/**
+ * 
+ * Convert an RGB pixel into a Greyscale pixel, by means of color component averaging
+ * 
+ */
 GPx * ConvertPX(RGBPx * px){
     GPx * tmp = (GPx *)calloc(1, sizeof(GPx));
     tmp->grey = (px->r + px->g + px->b) / 3;
@@ -137,9 +179,12 @@ GPx * ConvertPX(RGBPx * px){
 }
 
 
-// Greyscale functions
 
-
+/**
+ * 
+ * Create a Greyscale Matrix
+ * 
+ */
 GreyMatrix * CreateGreyMat(int rows, int cols)
 {
     GreyMatrix *tmp;
@@ -158,7 +203,13 @@ GreyMatrix * CreateGreyMat(int rows, int cols)
     return tmp;
 }
 
-GreyMatrix * LoadGreyFromFile(char * name) // TODO FIX
+
+/**
+ * 
+ * Load a Greyscale Matrix from a file called name TODO: FIX THIS
+ * 
+ */
+GreyMatrix * LoadGreyFromFile(char * name)
 {
     FILE *fp = fopen(name, "rb");
     char buff[16];
@@ -187,6 +238,14 @@ GreyMatrix * LoadGreyFromFile(char * name) // TODO FIX
     return tmp;
 }
 
+
+/**
+ * 
+ * Save a Greyscale Matrix gm to a file called name TODO: FIX THIS
+ * Right now this is saving three images for some reason? IDK Error might be in
+ * conversion
+ * 
+ */
 void SaveGreyOnFile(GreyMatrix *gm, char *name)
 {
     FILE *fp = fopen(name, "wb");
@@ -202,6 +261,12 @@ void SaveGreyOnFile(GreyMatrix *gm, char *name)
     fwrite(gm->data,gm->size, gm->y, fp);
 }
 
+
+/**
+ * 
+ * Print a Greyscale Matrix gm on the console
+ * 
+ */
 void PrintGreyMat(GreyMatrix * dm){
     GPx * array_ptr = dm->data;
 
@@ -213,6 +278,12 @@ void PrintGreyMat(GreyMatrix * dm){
     printf("\n");
 }
 
+
+/**
+ * 
+ * Print a Greyscale Pixel
+ * 
+ */
 void PrintGPx(GPx * px){
     printf("[%d]", px->grey);
 }
