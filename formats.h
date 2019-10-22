@@ -67,6 +67,11 @@ void PrintMat(DynamicMatrix * dm);
 
 void PrintRGBPx(RGBPx * px);
 
+DynamicMatrix * ConvertToGreyscale(DynamicMatrix * dm);
+
+RGBPx * MatchRed(RGBPx * pixel);
+
+
 #endif //INC_00_FORMATS_H
 
 // Move these to a different module

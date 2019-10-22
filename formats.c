@@ -75,7 +75,7 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
 
     // Writing rows, columns and maximum brightness
     fprintf(fp, "%d %d\n", dm->x, dm->y);
-    fprintf(fp, "%d", dm->max_bright);
+    fprintf(fp, "%d\n", dm->max_bright);
 
     // Writing data
     fwrite(dm->data, 3 * dm->x, dm->y, fp);
@@ -94,8 +94,39 @@ void PrintMat(DynamicMatrix *dm)
     printf("\n");
 }
 
+RGBPx * GetPxAt(DynamicMatrix *dm, int index){ // Not working?
+    return &(dm->data[index]);
+}
+
 void PrintRGBPx(RGBPx *px){
-
     printf("[ %d, %d, %d ]", px->r, px->g, px->b);
+}
 
+
+DynamicMatrix * ConvertToGreyscale(DynamicMatrix *dm){
+
+    DynamicMatrix * ret = CreateMat(dm->x, dm->y, dm->max_bright);
+    RGBPx *source = dm->data;
+    RGBPx *target = ret->data;
+
+    for (int i = 0; i < dm->size; i++)
+    {
+        // PrintRGBPx(source);
+        target = MatchRed(source);
+        source++;
+        target++;
+    }
+
+
+    return ret;
+    
+}
+
+RGBPx * MatchRed(RGBPx * px){
+    RGBPx * tmp = (RGBPx *)calloc(1, sizeof(RGBPx));
+    tmp->r = px->r;
+    tmp->g = px->r;
+    tmp->b = px->r;
+
+    return tmp;
 }
