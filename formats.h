@@ -45,7 +45,7 @@ typedef struct{
 
 /**
  * 
- * Matrix that can grow dynamically, based on the provided
+ * RGB Matrix that can grow dynamically, based on the provided
  * MyVec implementation.
  * 
  */
@@ -57,6 +57,25 @@ typedef struct {
     int max_bright;
 } DynamicMatrix;
 
+
+/**
+ * 
+ * GREY Matrix that can grow dynamically, based on the provided
+ * MyVec implementation.
+ * 
+ */
+typedef struct {
+    GPx *data;
+    int n;
+    int x, y;
+    int size;
+} GreyMatrix;
+
+
+
+
+// RGB Functions
+
 DynamicMatrix * CreateMat(int rows, int cols, int max_bright);
 
 DynamicMatrix * LoadFromFile(char *);
@@ -67,25 +86,22 @@ void PrintMat(DynamicMatrix * dm);
 
 void PrintRGBPx(RGBPx * px);
 
-DynamicMatrix * ConvertToGreyscale(DynamicMatrix * dm);
+GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm);
 
-RGBPx * MatchRed(RGBPx * pixel);
+GPx * ConvertPX(RGBPx * px);
+
+
+// Greyscale Functions
+
+GreyMatrix * CreateGreyMat(int rows, int cols);
+
+GreyMatrix * LoadGreyFromFile(char *);
+
+void SaveGreyOnFile(GreyMatrix *v, char *name);
+
+void PrintGreyMat(GreyMatrix * dm);
+
+void PrintGPx(GPx * px);
 
 
 #endif //INC_00_FORMATS_H
-
-// Move these to a different module
-// typedef struct{
-//     int y;
-// } Greyscale;
-
-// typedef struct{
-//     int byte[8]; 
-// } Byte;
-
-// typedef struct{
-//     int height;
-//     int length;
-//     RGB matrix[0][0]; 
-// } Imagem;
-
