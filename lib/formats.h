@@ -86,9 +86,9 @@ void PrintMat(DynamicMatrix * dm);
 
 void PrintRGBPx(RGBPx * px);
 
-GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm);
+GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm, int channel);
 
-GPx * ConvertPX(RGBPx * px);
+GPx * ConvertPX(RGBPx * px, int channel);
 
 
 // Greyscale Functions

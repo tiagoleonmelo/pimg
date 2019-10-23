@@ -18,7 +18,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
+#define NONE 0
+#define RED 1
+#define GREEN 2
+#define BLUE 3
 
 /**
  * 
@@ -125,7 +128,8 @@ void PrintMat(DynamicMatrix *dm)
  * Print a RGB Pixel in the form [R, G, B]
  * 
  */
-void PrintRGBPx(RGBPx *px){
+void PrintRGBPx(RGBPx *px)
+{
     printf("[ %d, %d, %d ]", px->r, px->g, px->b);
 }
 
@@ -139,7 +143,8 @@ void PrintRGBPx(RGBPx *px){
  * a buffer. This buffer is then used as the new Greyscale Matrix's data.
  * 
  */
-GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm){
+GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm, int channel)
+{
 
     GreyMatrix * ret = CreateGreyMat(dm->x, dm->y);
     RGBPx *source = dm->data;
@@ -150,7 +155,7 @@ GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm){
 
     for (int i = 0; i < dm->size; i++)
     {
-        new_px = ConvertPX(source); 
+        new_px = ConvertPX(source, channel); 
 
         buffer[i] = *new_px;
 
@@ -170,15 +175,33 @@ GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm){
  * Convert an RGB pixel into a Greyscale pixel, by means of color component averaging
  * 
  */
-GPx * ConvertPX(RGBPx * px)
+GPx * ConvertPX(RGBPx * px, int channel)
 {
     GPx * tmp = (GPx *)malloc(sizeof(GPx));
-    tmp->grey = (px->r + px->g + px->b) / 3;
+
+    switch (channel)
+    {
+    case RED:
+        tmp->grey = px->r;
+        break;
+    
+    case GREEN:
+        tmp->grey = px->g;
+        break;
+
+    case BLUE:
+        tmp->grey = px->b;
+        break;
+
+
+    default:
+        tmp->grey = (px->r + px->g + px->b) / 3;
+        break;
+    }
 
 
     return tmp;
 }
-
 
 
 /**
@@ -221,7 +244,7 @@ GreyMatrix * LoadGreyFromFile(char * name)
     }
 
     // Checking the image format
-    if (buff[0] != 'P' || buff[1] != '6') {
+    if (buff[0] != 'P' || buff[1] != '5') {
          fprintf(stderr, "Invalid image format (must be 'P6')\n");
          exit(1);
     }
@@ -234,7 +257,7 @@ GreyMatrix * LoadGreyFromFile(char * name)
 
 
     GreyMatrix *tmp = CreateGreyMat(x, y);
-    fread(tmp->data, 3 * tmp->x, tmp->y, fp);
+    fread(tmp->data, tmp->x, tmp->y, fp);
 
     return tmp;
 }
