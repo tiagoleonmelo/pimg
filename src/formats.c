@@ -101,6 +101,8 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
 
     // Writing data
     fwrite(dm->data, 3 * dm->x, dm->y, fp);
+
+    fclose(fp);
 }
 
 
@@ -120,6 +122,88 @@ void PrintMat(DynamicMatrix *dm)
     }
 
     printf("\n");
+}
+
+
+/**
+ * 
+ * Access the position at [row][col] in the matrix dm
+ * 
+ */
+RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
+    int index = (row * dm->x) + col;
+    return &(dm->data[index]);
+}
+
+
+/**
+ * 
+ * DOESN'T WORK
+ * 
+ */
+DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
+{
+
+    int cols = x2 - x1;
+    int rows = y2 - y1;
+    int index1 = (x1-1) * dm->x + (y1-1);
+    int index2 = (x2-1) * dm->x + (y2-1);
+    RGBPx * ptr;
+
+    // Lazy implementation of the abs() function
+
+    if (rows < 0)
+    {
+        rows *= -1;
+    }
+    
+    if (cols < 0)
+    {
+        cols *= -1;
+    }
+
+    DynamicMatrix * sub = CreateMat(rows, cols, dm->max_bright);
+    int counter = 0;
+
+    if (index1 < index2)
+    {
+        ptr = dm->data + index1;
+        RGBPx buffer[index2 - index1];
+        printf("DM %d\n", dm->size);
+        printf("SUB %d\n", sub->size);
+        printf("IDXDIFF %d\n", index2 - index1);
+
+        for (int i = index1; i < index2; i++)
+            {
+                // Update buffer data
+                buffer[counter] = *ptr;
+                counter++;
+                ptr++;
+            }
+
+        sub->data = buffer;
+
+    }
+    else
+    {
+        ptr = dm->data + index2;
+        RGBPx buffer[index1 - index2];
+
+        for (int i = index2; i < index1; i++)
+            {
+                // Update sub data
+                buffer[counter] = *ptr;
+                counter++;
+                ptr++;
+            }
+
+        sub->data = buffer;
+
+    }
+    
+
+    return sub;
+    
 }
 
 
@@ -305,6 +389,17 @@ void PrintGreyMat(GreyMatrix * dm){
 
 /**
  * 
+ * Access the position at [row][col] in the matrix dm
+ * 
+ */
+GPx * AccessGPx(GreyMatrix * dm, int row, int col){
+    int index = row * dm->x + col;
+    return &(dm->data[index]);
+}
+
+
+/**
+ * 
  * Print a Greyscale Pixel
  * 
  */
@@ -312,4 +407,52 @@ void PrintGPx(GPx * px){
     printf("%d ", px->grey);
 }
 
+
+/**
+ * 
+ * TODO:
+ * 
+ * Function that converts a Greyscale Matrix gm to a BitMap matrix
+ * and returns it.
+ * 
+ * It iterates through Greyscale data, matches it with a user given threshold and
+ * creates a Bit based on that operation.
+ * 
+ */
+int *  CreateBitMat(int rows, int cols){
+
+    // Allocate enough memory for rows * cols pixels
+    int * tmp = (int *)malloc((rows * cols) / 32);
+
+    return tmp;
+}
+
+// int * LoadBitMatFromFile(char * name){
+
+//     FILE *fp = fopen(name, "rb");
+//     char buff[16];
+    
+//     // Reading the image format
+//     if (!fgets(buff, sizeof(buff), fp)) {
+//         exit(1);
+//     }
+
+//     // Checking the image format
+//     if (buff[0] != 'P' || buff[1] != '4') {
+//          fprintf(stderr, "Invalid image format (must be 'P4')\n");
+//          exit(1);
+//     }
+
+//     int x, y, max_bright;
+    
+//     fscanf(fp, "%d", &x);
+//     fscanf(fp, "%d", &y);
+//     fscanf(fp, "%d", &max_bright);
+
+
+//     int *tmp = CreateBitMat(x, y);
+//     fread(tmp, , tmp->y, fp);
+
+//     return tmp;
+// }
 

@@ -32,14 +32,12 @@ typedef struct{
 
 /**
  * 
- * Structure that holds the whole image. For each black pixel found,
- * image will store it using masks. The image can later be loading with a
- * XOR operation
+ * Data structure
  * 
  */
 typedef struct{
-    unsigned long long image; 
-} Bitmap;
+    unsigned int bit : 1; 
+} Bit;
 
 
 
@@ -72,6 +70,29 @@ typedef struct {
 } GreyMatrix;
 
 
+/**
+ * 
+ * BIT Matrix that can grow dynamically, based on the provided
+ * MyVec implementation.
+ * 
+ */
+typedef struct {
+    Bit *data;
+    int x, y;
+    int size;
+} BitMatrix;
+
+
+/**
+ * 
+ * BitMap Image processing is done via integer array, where each position of the array
+ * holds 32 values (4 bytes * 8 bits)
+ * 
+ * Hope it works lmao
+ * 
+ */
+
+
 
 
 // RGB Functions
@@ -83,6 +104,10 @@ DynamicMatrix * LoadFromFile(char *);
 void SaveOnFile(DynamicMatrix *v, char *name);
 
 void PrintMat(DynamicMatrix * dm);
+
+RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col);
+
+DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2);
 
 void PrintRGBPx(RGBPx * px);
 
@@ -101,7 +126,21 @@ void SaveGreyOnFile(GreyMatrix *v, char *name);
 
 void PrintGreyMat(GreyMatrix * dm);
 
+GPx * AccessGPx(GreyMatrix * dm, int row, int col);
+
 void PrintGPx(GPx * px);
 
+
+// Bit Functions
+
+int *  CreateBitMat(int rows, int cols);
+
+int * LoadBitMatFromFile(char *);
+
+void SaveBitMatOnFile(int *mat, char *name);
+
+void PrintBitMat(int *mat);
+
+void PrintBit(int index);
 
 #endif //INC_00_FORMATS_H
