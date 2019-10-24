@@ -1,7 +1,6 @@
 /**
  * 
- * Header that contains DynMat functions for the RGB Module
-
+ * Header which contains the required structures and function declarations for the RGB Module.
  * 
  */
 
@@ -26,7 +25,7 @@ typedef struct{
 
 /**
  * 
- * Matrix that can grow dynamically, based on the provided
+ * RGB Matrix that can grow dynamically, based on the provided
  * MyVec implementation.
  * 
  */
@@ -38,21 +37,28 @@ typedef struct {
     int max_bright;
 } DynamicMatrix;
 
+// RGB Functions
 
+//read/write
+DynamicMatrix * CreateMat(int rows, int cols, int max_bright);
 
-DynamicMatrix * CreateRGBMat(int rows, int cols, int max_bright);
+DynamicMatrix * LoadFromFile(char *);
 
-DynamicMatrix * LoadRGBFromFile(char *);
+void SaveOnFile(DynamicMatrix *v, char *name);
 
-void SaveRGBOnFile(DynamicMatrix *v, char *name);
+void PrintMat(DynamicMatrix * dm);
 
-void PrintRGBMat(DynamicMatrix * dm);
+//pixel/area
+RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col);
 
 void PrintRGBPx(RGBPx * px);
 
-GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm);
+DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2);
 
-GPx * Greyscale(RGBPx * pixel);
+//convertion
+GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm, int channel);
+
+GPx * ConvertPX(RGBPx * px, int channel);
 
 
 #endif //INC_00_RGB_H

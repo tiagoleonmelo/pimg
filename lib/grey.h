@@ -1,12 +1,14 @@
 /**
  * 
- * Header that contains DynMat functions for the Greyscale Module
+ * Header which contains the required structures and function declarations for the Greyscale Module.
  * 
  */
 
+//TODO: IMPLEMENTAR ACCESSGREYREGION
+
 #ifndef INC_00_GREY_H
 #define INC_00_GREY_H
-#include "rgb.h"
+//#include "rgb.h"
 
 /**
  * 
@@ -22,7 +24,7 @@ typedef struct{
 
 /**
  * 
- * Matrix that can grow dynamically, based on the provided
+ * GREY Matrix that can grow dynamically, based on the provided
  * MyVec implementation.
  * 
  */
@@ -31,19 +33,33 @@ typedef struct {
     int n;
     int x, y;
     int size;
-    int max_bright;
 } GreyMatrix;
 
 
-GreyMatrix * CreateGREYMat(int rows, int cols, int max_bright);
+// Greyscale Functions
 
-GreyMatrix * LoadGREYFromFile(char *);
+//read/write
+GreyMatrix * CreateGreyMat(int rows, int cols);
 
-void SaveGREYOnFile(GreyMatrix *v, char *name);
+GreyMatrix * LoadGreyFromFile(char *);
 
-void PrintGREYMat(GreyMatrix * dm);
+void SaveGreyOnFile(GreyMatrix *v, char *name);
+
+void PrintGreyMat(GreyMatrix * dm);
+
+//pixel/area
+GPx * AccessGPx(GreyMatrix * dm, int row, int col);
 
 void PrintGPx(GPx * px);
+
+GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2);
+
+//convert
+unsigned int * ConvertToBitMat(GreyMatrix * gm);
+
+GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold);
+
+unsigned int ConvertToBit(int pixels[]);
 
 
 #endif //INC_00_GREY_H

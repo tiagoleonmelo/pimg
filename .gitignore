@@ -1,1 +1,6 @@
 .vscode/*
+build/bit.o
+build/grey.o
+build/rgb.o
+build/test.o
+build/test

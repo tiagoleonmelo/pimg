@@ -1,16 +1,24 @@
-all: read_img
+all: test
 
-read_img: formats.o read_img.o filters.o
+test: rgb.o grey.o bit.o test.o filters.o
 
-	gcc -o read_img read_img.o formats.o filters.o
-
-
-read_img.o: ../src/read_img.c
-	gcc -o read_img.o -c ../src/read_img.c -W -Wall
+	gcc -o test test.o rgb.o grey.o bit.o filters.o
 
 
-formats.o: ../src/formats.c
-	gcc -o formats.o -c ../src/formats.c -W -Wall
+test.o: ../src/test.c
+	gcc -o test.o -c ../src/test.c -W -Wall
+
+
+rgb.o: ../src/rgb.c
+	gcc -o rgb.o -c ../src/rgb.c -W -Wall
+
+
+grey.o: ../src/grey.c
+	gcc -o grey.o -c ../src/grey.c -W -Wall
+
+
+bit.o: ../src/bit.c
+	gcc -o bit.o -c ../src/bit.c -W -Wall
 
 
 filters.o: ../src/filters.c
@@ -19,5 +27,3 @@ filters.o: ../src/filters.c
 
 clean:
 	rm -rf *.o
-
-
