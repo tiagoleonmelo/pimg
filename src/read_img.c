@@ -24,12 +24,12 @@ int main(void)
 
 
     // Accessing a single pixel in RGB format
-    PrintRGBPx(AccessRGBPx(dm, 501, 499));
+    PrintRGBPx(AccessRGBPx(dm, 511, 511));
     printf("\n");
 
 
     // Accessing a RGB Matrix Region
-    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 512, 512);
+    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 510, 510);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
     
@@ -45,6 +45,13 @@ int main(void)
     SaveGreyOnFile(red, "../res/red_lena.pgm");
     SaveGreyOnFile(green, "../res/green_lena.pgm");
     SaveGreyOnFile(blue, "../res/blue_lena.pgm");
+
+
+    int threshold = 128;
+    GreyMatrix * bmp = ConvertToBitGreyMat(gm, threshold);
+    // PrintGreyMat(bmp);
+    SaveGreyOnFile(bmp, "../res/bit_lena.pgm");
+
 
 
 

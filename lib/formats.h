@@ -130,6 +130,12 @@ GPx * AccessGPx(GreyMatrix * dm, int row, int col);
 
 void PrintGPx(GPx * px);
 
+unsigned int * ConvertToBitMat(GreyMatrix * gm);
+
+GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold);
+
+unsigned int ConvertToBit(int pixels[]);
+
 
 // Bit Functions
 
@@ -137,10 +143,14 @@ int *  CreateBitMat(int rows, int cols);
 
 int * LoadBitMatFromFile(char *);
 
-void SaveBitMatOnFile(int *mat, char *name);
+void SaveBitMatOnFile(unsigned int *mat, char *name, int size);
 
-void PrintBitMat(int *mat);
+void PrintBitMat(unsigned int *mat, int size);
 
 void PrintBit(int index);
+
+void Print32Bits(int n);
+
+void Print32BitsToFile(int num, char *);
 
 #endif //INC_00_FORMATS_H

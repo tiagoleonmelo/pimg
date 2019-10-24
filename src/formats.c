@@ -23,6 +23,10 @@
 #define GREEN 2
 #define BLUE 3
 
+#define SetBit(A,k)     ( A[(k/32)] |= (1 << (k%32)) )
+#define ClearBit(A,k)   ( A[(k/32)] &= ~(1 << (k%32)) )
+#define TestBit(A,k)    ( A[(k/32)] & (1 << (k%32)) )
+
 /**
  * 
  * Create a RGB Matrix
@@ -144,10 +148,11 @@ RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
 DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 {
 
-    int cols = x2 - x1;
-    int rows = y2 - y1;
-    int index1 = (x1-1) * dm->x + (y1-1);
-    int index2 = (x2-1) * dm->x + (y2-1);
+    int rows = x2 - x1;
+    int cols = y2 - y1;
+    int index1 = (x1 * dm->x) + y1;
+    int index2 = (x2 * dm->x) + y2;
+    // printf("%d\n\n", index2);
     RGBPx * ptr;
 
     // Lazy implementation of the abs() function
@@ -168,15 +173,15 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
     if (index1 < index2)
     {
         ptr = dm->data + index1;
-        RGBPx buffer[index2 - index1];
-        printf("DM %d\n", dm->size);
-        printf("SUB %d\n", sub->size);
-        printf("IDXDIFF %d\n", index2 - index1);
+        RGBPx buffer[index2 - index1]; //
+        // printf("DM %d\n", dm->size);
+        // printf("SUB %d\n", sub->size);
+        // printf("IDXDIFF %d\n", index2 - index1);
 
         for (int i = index1; i < index2; i++)
             {
                 // Update buffer data
-                buffer[counter] = *ptr;
+                buffer[counter] = dm->data[i];
                 counter++;
                 ptr++;
             }
@@ -410,7 +415,6 @@ void PrintGPx(GPx * px){
 
 /**
  * 
- * TODO:
  * 
  * Function that converts a Greyscale Matrix gm to a BitMap matrix
  * and returns it.
@@ -418,8 +422,153 @@ void PrintGPx(GPx * px){
  * It iterates through Greyscale data, matches it with a user given threshold and
  * creates a Bit based on that operation.
  * 
+ * An array of masks is then returned
+ * 
  */
-int *  CreateBitMat(int rows, int cols){
+unsigned int * ConvertToBitMat(GreyMatrix * gm)
+{
+
+    GPx *source = gm->data;
+
+    // We have an int array. Each slot has 32 bits. If we want to store 32 pixels we only
+    // need 1 slot. Math explained.
+    unsigned int * buffer = malloc(sizeof(unsigned int) * gm->size/32);
+    int short_buffer[32];
+    unsigned int new_px;
+
+    for(int i = 0; i < gm->size/32; i++){
+        buffer[i] = 0;
+    }
+
+
+
+    for (int i = 0; i < gm->size /32; i++)
+    {
+
+        for (int j = 0; j < 32; j++)
+        {
+            short_buffer[j] = source->grey;
+            source++;
+        }
+        
+        new_px = ConvertToBit(short_buffer); 
+
+        buffer[i] = new_px;
+
+    }
+
+
+    // for(int i = 0; i < gm->size/32; i++){
+    //     printf("%u; ", buffer[i]);
+    // }
+
+
+    
+    return buffer;
+    
+}
+
+/**
+ * 
+ * Big hack: instead of saving the image using bits, save it in greymap, where a 1 is replaced with
+ * 255 and a 0 replaced with 0.
+ * 
+ * The bit array implementation explained above didnt quite work, 
+ * so we went for this one instead.
+ * 
+ */
+GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold)
+{
+
+    GPx *source = gm->data;
+    GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
+    GPx new_px;
+    GPx buffer[gm->size];
+
+    for (int i = 0; i < gm->size; i++)
+    {
+
+        new_px = *source;
+
+        if (source->grey >= threshold)
+        {
+            new_px.grey = 255;
+        }
+        else
+        {
+            new_px.grey = 0;
+        }
+        
+        
+        buffer[i] = new_px;
+
+        source++;
+
+    }
+
+    ret->data = buffer;
+
+    return ret;
+
+}
+
+/**
+ * 
+ * Reads 32 pixels and converts them into an unsigned integer mask
+ * 
+ * Example:
+ * 
+ * If we have the pixels 1 6 7 10 and the threshold is 5 the resulting 4 bits will be
+ * 
+ * 0 1 1 1
+ * 
+ * 
+ */
+unsigned int ConvertToBit(int pixels[])
+{
+
+    // We have a "clean" bit, meant only for shifting purposes
+    unsigned int bit = 1;       // 0000 0000 0000 0000 ...(x7) ... 0000 0000 0000 0001
+
+    // And the mask which we will return
+    unsigned int mask = 0;      // 0000 0000 0000 0000 ...(x8)
+
+
+    // We'll parse an image to bitmap 32 pixels at the time
+    for (int i = 0; i < 32; i++)
+    {
+
+        if (pixels[i] >= 128)
+        {
+            // Big Endian Notation for better readibility of the BitMap
+            bit = bit << (31 - i);
+        }
+        else
+        {
+            bit = 0;
+        }
+
+        mask = mask ^ bit;
+
+        // Cleaning the bit
+        bit = 1;
+        
+        
+    }
+    
+    return mask;
+
+}
+
+
+/**
+ * 
+ * Straight-forward memory allocation. However, maybe it would be a good idea to associate each pointer with
+ * another pointer to the end of the array.
+ * 
+ */
+int * CreateBitMat(int rows, int cols)
+{
 
     // Allocate enough memory for rows * cols pixels
     int * tmp = (int *)malloc((rows * cols) / 32);
@@ -427,32 +576,189 @@ int *  CreateBitMat(int rows, int cols){
     return tmp;
 }
 
-// int * LoadBitMatFromFile(char * name){
 
-//     FILE *fp = fopen(name, "rb");
-//     char buff[16];
+/**
+ * 
+ * Loading a BMP file
+ * 
+ */
+int * LoadBitMatFromFile(char * name)
+{
+
+    FILE *fp = fopen(name, "rb");
+    char buff[16];
     
-//     // Reading the image format
-//     if (!fgets(buff, sizeof(buff), fp)) {
-//         exit(1);
-//     }
+    // Reading the image format
+    if (!fgets(buff, sizeof(buff), fp)) {
+        exit(1);
+    }
 
-//     // Checking the image format
-//     if (buff[0] != 'P' || buff[1] != '4') {
-//          fprintf(stderr, "Invalid image format (must be 'P4')\n");
-//          exit(1);
-//     }
+    // Checking the image format
+    if (buff[0] != 'P' || buff[1] != '4') {
+         fprintf(stderr, "Invalid image format (must be 'P4')\n");
+         exit(1);
+    }
 
-//     int x, y, max_bright;
+    int x, y, max_bright;
     
-//     fscanf(fp, "%d", &x);
-//     fscanf(fp, "%d", &y);
-//     fscanf(fp, "%d", &max_bright);
+    fscanf(fp, "%d", &x);
+    fscanf(fp, "%d", &y);
+    fscanf(fp, "%d", &max_bright);
 
 
-//     int *tmp = CreateBitMat(x, y);
-//     fread(tmp, , tmp->y, fp);
+    int *tmp = CreateBitMat(x, y);
+    fread(tmp, x, y, fp);
 
-//     return tmp;
-// }
+    return tmp;
+}
+
+
+/**
+ * 
+ * Save a BitMap to a File
+ * 
+ */
+void SaveBitMatOnFile(unsigned int *mat, char *name, int size)
+{
+
+    FILE *fp = fopen(name, "wb");
+    int resto;
+    int ret[32];
+    int j = 31;
+    unsigned int * copy = mat;
+
+    fprintf(fp, "P4\n");
+    fprintf(fp, "%d %d\n", 512, 512);
+
+    printf("fixe\n\n");
+    for (int i = 0; i < size; i++)
+    {
+
+
+        for (int r = 0; r < 32; r++)
+        {
+            ret[r] = 0;
+        }
+        
+
+        while(*copy > 0)
+        {
+
+            resto = *copy % 2;
+            *copy = *copy / 2;
+            ret[j] = resto;
+            j--;
+
+        }
+
+        j = 31;
+
+        for (int r = 0; r < 32; r++)
+        {
+            fprintf(fp,"%d", ret[r]);
+        }
+
+        copy++;
+
+    }
+
+    fclose(fp);
+
+
+}
+
+/**
+ * 
+ * Function that prints a BitMap matrix
+ * 
+ */
+void PrintBitMat(unsigned int * bmp, int size)
+{
+
+    unsigned int * copy = bmp;
+
+    for (int i = 0; i < size; i++)
+    {
+        Print32Bits(*copy);
+        copy++;
+    }
+    
+
+}
+
+
+/**
+ * 
+ * Convert an integer to its binary form and print it
+ * 
+ */
+void Print32Bits(int num)
+{
+    int resto;
+    int ret[32];
+    int j = 31;
+
+    for (int i = 0; i < 32; i++)
+    {
+        ret[i] = 0;
+    }
+    
+
+    while(num > 0)
+    {
+
+        resto = num % 2;
+        num = num / 2;
+        ret[j] = resto;
+        j--;
+
+    }
+
+    for (int i = 0; i < 32; i++)
+    {
+        printf("%d", ret[i]);
+    }
+
+}
+
+
+/**
+ * 
+ * Printing 32 Bits onto a file, following the same logic above
+ * 
+ */
+void Print32BitsToFile(int num, char * name)
+{
+
+    int resto;
+    int ret[32];
+    int j = 31;
+
+    FILE *fp = fopen(name, "wb");
+
+    for (int i = 0; i < 32; i++)
+    {
+        ret[i] = 0;
+    }
+    
+
+    while(num > 0)
+    {
+
+        resto = num % 2;
+        num = num / 2;
+        ret[j] = resto;
+        j--;
+
+    }
+
+    for (int i = 0; i < 32; i++)
+    {
+        fprintf(fp,"%d", ret[i]);
+    }
+
+    fclose(fp);
+
+
+}
 
