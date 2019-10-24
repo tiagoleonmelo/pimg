@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../lib/formats.h"
+#include "../lib/filters.h"
 
 #define NONE 0
 #define RED 1
@@ -29,7 +30,7 @@ int main(void)
 
 
     // Accessing a RGB Matrix Region
-    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 510, 510);
+    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 512, 512);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
     
@@ -47,10 +48,15 @@ int main(void)
     SaveGreyOnFile(blue, "../res/blue_lena.pgm");
 
 
-    int threshold = 128;
+    int threshold = 100;
     GreyMatrix * bmp = ConvertToBitGreyMat(gm, threshold);
     // PrintGreyMat(bmp);
     SaveGreyOnFile(bmp, "../res/bit_lena.pgm");
+
+
+    DynamicMatrix * saturated = Saturate(dm);
+    SaveOnFile(saturated, "../res/saturated_lena.ppm");
+    PrintMat(saturated);
 
 
 

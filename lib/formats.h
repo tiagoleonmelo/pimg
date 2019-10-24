@@ -36,8 +36,8 @@ typedef struct{
  * 
  */
 typedef struct{
-    unsigned int bit : 1; 
-} Bit;
+    unsigned char bit; 
+} BinPx;
 
 
 
@@ -69,18 +69,6 @@ typedef struct {
     int size;
 } GreyMatrix;
 
-
-/**
- * 
- * BIT Matrix that can grow dynamically, based on the provided
- * MyVec implementation.
- * 
- */
-typedef struct {
-    Bit *data;
-    int x, y;
-    int size;
-} BitMatrix;
 
 
 /**

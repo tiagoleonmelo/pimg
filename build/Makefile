@@ -1,8 +1,8 @@
 all: read_img
 
-read_img: formats.o read_img.o
+read_img: formats.o read_img.o filters.o
 
-	gcc -o read_img read_img.o formats.o
+	gcc -o read_img read_img.o formats.o filters.o
 
 
 read_img.o: ../src/read_img.c
@@ -11,6 +11,11 @@ read_img.o: ../src/read_img.c
 
 formats.o: ../src/formats.c
 	gcc -o formats.o -c ../src/formats.c -W -Wall
+
+
+filters.o: ../src/filters.c
+	gcc -o filters.o -c ../src/filters.c -W -Wall
+
 
 clean:
 	rm -rf *.o
