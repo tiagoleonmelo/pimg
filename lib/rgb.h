@@ -1,7 +1,6 @@
 /**
  * 
- * Header that contains DynMat functions for the RGB Module
-
+ * Header which contains the required structures and function declarations for the RGB Module.
  * 
  */
 
@@ -40,6 +39,7 @@ typedef struct {
 
 // RGB Functions
 
+//read/write
 DynamicMatrix * CreateMat(int rows, int cols, int max_bright);
 
 DynamicMatrix * LoadFromFile(char *);
@@ -48,12 +48,14 @@ void SaveOnFile(DynamicMatrix *v, char *name);
 
 void PrintMat(DynamicMatrix * dm);
 
+//pixel/area
 RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col);
-
-DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2);
 
 void PrintRGBPx(RGBPx * px);
 
+DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2);
+
+//convertion
 GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm, int channel);
 
 GPx * ConvertPX(RGBPx * px, int channel);

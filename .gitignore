@@ -1,4 +1,6 @@
 .vscode/*
-build/formats.o
-build/read_img
-build/read_img.o
+build/bit.o
+build/grey.o
+build/rgb.o
+build/test.o
+build/test
