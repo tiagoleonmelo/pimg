@@ -26,7 +26,7 @@ typedef struct{
 
 /**
  * 
- * Matrix that can grow dynamically, based on the provided
+ * RGB Matrix that can grow dynamically, based on the provided
  * MyVec implementation.
  * 
  */
@@ -38,21 +38,25 @@ typedef struct {
     int max_bright;
 } DynamicMatrix;
 
+// RGB Functions
 
+DynamicMatrix * CreateMat(int rows, int cols, int max_bright);
 
-DynamicMatrix * CreateRGBMat(int rows, int cols, int max_bright);
+DynamicMatrix * LoadFromFile(char *);
 
-DynamicMatrix * LoadRGBFromFile(char *);
+void SaveOnFile(DynamicMatrix *v, char *name);
 
-void SaveRGBOnFile(DynamicMatrix *v, char *name);
+void PrintMat(DynamicMatrix * dm);
 
-void PrintRGBMat(DynamicMatrix * dm);
+RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col);
+
+DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2);
 
 void PrintRGBPx(RGBPx * px);
 
-GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm);
+GreyMatrix * ConvertToGreyscale(DynamicMatrix * dm, int channel);
 
-GPx * Greyscale(RGBPx * pixel);
+GPx * ConvertPX(RGBPx * px, int channel);
 
 
 #endif //INC_00_RGB_H

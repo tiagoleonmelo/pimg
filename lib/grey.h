@@ -22,7 +22,7 @@ typedef struct{
 
 /**
  * 
- * Matrix that can grow dynamically, based on the provided
+ * GREY Matrix that can grow dynamically, based on the provided
  * MyVec implementation.
  * 
  */
@@ -31,19 +31,28 @@ typedef struct {
     int n;
     int x, y;
     int size;
-    int max_bright;
 } GreyMatrix;
 
 
-GreyMatrix * CreateGREYMat(int rows, int cols, int max_bright);
+// Greyscale Functions
 
-GreyMatrix * LoadGREYFromFile(char *);
+GreyMatrix * CreateGreyMat(int rows, int cols);
 
-void SaveGREYOnFile(GreyMatrix *v, char *name);
+GreyMatrix * LoadGreyFromFile(char *);
 
-void PrintGREYMat(GreyMatrix * dm);
+void SaveGreyOnFile(GreyMatrix *v, char *name);
+
+void PrintGreyMat(GreyMatrix * dm);
+
+GPx * AccessGPx(GreyMatrix * dm, int row, int col);
 
 void PrintGPx(GPx * px);
+
+unsigned int * ConvertToBitMat(GreyMatrix * gm);
+
+GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold);
+
+unsigned int ConvertToBit(int pixels[]);
 
 
 #endif //INC_00_GREY_H

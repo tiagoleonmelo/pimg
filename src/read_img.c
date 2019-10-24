@@ -1,7 +1,9 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include "../lib/formats.h"
+#include "../lib/rgb.h"
+#include "../lib/grey.h"
+#include "../lib/bit.h"
 
 #define NONE 0
 #define RED 1
