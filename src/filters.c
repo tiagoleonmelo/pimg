@@ -39,7 +39,12 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
         if (test > 255)
         {
             new_px.r = 255;
-        }else
+        }
+        else if (test < 0)
+        {
+            new_px.r = 0;
+        }   
+        else
         {
             new_px.r += value;
         }
@@ -50,6 +55,10 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
         if (test > 255)
         {
             new_px.g = 255;
+        }
+        else if (test < 0)
+        {
+            new_px.g = 0;
         }
         else
         {
@@ -62,7 +71,12 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
         if (test > 255)
         {
             new_px.b = 255;
-        }else
+        }
+        else if (test < 0)
+        {
+            new_px.b = 0;
+        } 
+        else
         {
             new_px.b += value;
         }

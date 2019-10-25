@@ -66,7 +66,7 @@ int main(void)
     SaveGreyOnFile(bmp, "../res/bit_lena.pgm");
 
 
-    DynamicMatrix * saturated = Saturate(dm, 100);
+    DynamicMatrix * saturated = Saturate(dm, -100);
     SaveOnFile(saturated, "../res/saturated_lena.ppm");
     // PrintMat(saturated);
 

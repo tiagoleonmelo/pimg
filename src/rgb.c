@@ -139,12 +139,11 @@ RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
 DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 {
 
-    int rows = x2 - x1;
-    int cols = y2 - y1;
+    int rows = x2 - x1 + 1;
+    int cols = y2 - y1 + 1;
     int index1 = (x1 * dm->x) + y1;
     int index2 = (x2 * dm->x) + y2;
-    // printf("%d\n\n", index2);
-    RGBPx * ptr;
+
 
     // Lazy implementation of the abs() function
 
@@ -159,22 +158,29 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
     }
 
     DynamicMatrix * sub = CreateMat(rows, cols, dm->max_bright);
+    RGBPx buffer[sub->size]; //
+
     int counter = 0;
+    int jump;
+    int help = 0;
 
     if (index1 < index2)
     {
-        ptr = dm->data + index1;
-        RGBPx buffer[index2 - index1]; //
-        // printf("DM %d\n", dm->size);
-        // printf("SUB %d\n", sub->size);
-        // printf("IDXDIFF %d\n", index2 - index1);
+        jump = x1 + (dm->y - x2);
 
         for (int i = index1; i < index2; i++)
             {
                 // Update buffer data
                 buffer[counter] = dm->data[i];
                 counter++;
-                ptr++;
+                help++;
+
+                if(help == sub->y)
+                {
+                    i+=jump;
+                    help = 0;
+                }
+
             }
 
         sub->data = buffer;
@@ -182,15 +188,20 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
     }
     else
     {
-        ptr = dm->data + index2;
-        RGBPx buffer[index1 - index2];
+        jump = x2 + (dm->y - x1);
 
         for (int i = index2; i < index1; i++)
             {
-                // Update sub data
-                buffer[counter] = *ptr;
+                // Update buffer data
+                buffer[counter] = dm->data[i];
                 counter++;
-                ptr++;
+                help++;
+
+                if(help == sub->y)
+                {
+                    i+=jump;
+                    help = 0;
+                }
             }
 
         sub->data = buffer;
@@ -201,6 +212,7 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
     return sub;
     
 }
+
 
 
 /**
@@ -276,8 +288,9 @@ GPx * ConvertPX(RGBPx * px, int channel)
 
 
     default:
-        tmp->grey = (px->r + px->g + px->b) / 3;
+        tmp->grey = (30 * px->r + 59 * px->g + 11 * px->b) / 100;
         break;
+    
     }
 
 
