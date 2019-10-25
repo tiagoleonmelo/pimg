@@ -5,3 +5,5 @@ build/rgb.o
 build/test.o
 build/test
 build/filters.o
+res/*
+!res/lena.ppm
