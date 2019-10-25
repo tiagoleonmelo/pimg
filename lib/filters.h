@@ -18,6 +18,11 @@
 
 DynamicMatrix * Saturate(DynamicMatrix * dm, int value);
 
+GreyMatrix * SaturateGrey(GreyMatrix * dm, int value);
+
+
+
+GreyMatrix * Filter(GreyMatrix * gm, int size);
 
 
 

@@ -28,6 +28,7 @@ int main(void)
     DynamicMatrix *dm = LoadFromFile("../res/lena.ppm");
     // Saving it on a different file
     SaveOnFile(dm, "../res/savedRGB.ppm");
+    printf("%d \n", dm->size);
 
     // Converting the original RGB image to greyscale in each of the color channels
     // and storing the results (NONE means default RGB-Greyscale conversion)
@@ -71,6 +72,8 @@ int main(void)
     // PrintMat(saturated);
 
 
+    GreyMatrix * saturated_grey = SaturateGrey(gm, 100);
+    SaveGreyOnFile(saturated_grey, "../res/saturated_lena_grey.pgm");
 
 
 
