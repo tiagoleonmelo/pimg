@@ -92,7 +92,7 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
 
     // Writing rows, columns and maximum brightness
     fprintf(fp, "%d %d\n", dm->x, dm->y);
-    fprintf(fp, "%d", dm->max_bright);
+    fprintf(fp, "%d\n", dm->max_bright);
 
     // Writing data
     fwrite(dm->data, 3 * dm->x, dm->y, fp);

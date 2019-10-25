@@ -12,10 +12,11 @@
 #ifndef INC_00_FILTERS_H
 #define INC_00_FILTERS_H
 
-#include "formats.h"
+#include "../lib/rgb.h"
+#include "../lib/grey.h"
+#include "../lib/bit.h"
 
-
-DynamicMatrix * Saturate(DynamicMatrix * dm);
+DynamicMatrix * Saturate(DynamicMatrix * dm, int value);
 
 
 
