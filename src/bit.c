@@ -4,6 +4,14 @@
  * 
  * The Bit module contains methods for reading, writing and manipulating bitmap images.
  * 
+ * It is worth mentioning that a Binary Image is internally saved as a Greyscale Image, and is
+ * only converted to binary when reading from or writing to files. This way we can more easily
+ * increase compatibility between modules and image access.
+ * 
+ * At the time of writing, the feature of reading and writing .pbm files is not yet implemented.
+ * Instead, everything is treated as .pgm. Ideally, this would be implemented, but right now
+ * it's just TODO:.
+ * 
  * @param Authors João Nogueira, Tiago Melo
  * 
  */

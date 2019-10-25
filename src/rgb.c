@@ -68,7 +68,7 @@ DynamicMatrix * LoadFromFile(char *name)
     
     fscanf(fp, "%d", &x);
     fscanf(fp, "%d", &y);
-    fscanf(fp, "%d", &max_bright);
+    fscanf(fp, "%d\n", &max_bright);
 
 
     DynamicMatrix *tmp = CreateMat(x, y, max_bright);

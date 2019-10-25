@@ -61,7 +61,7 @@ GreyMatrix * LoadGreyFromFile(char * name)
     
     fscanf(fp, "%d", &x);
     fscanf(fp, "%d", &y);
-    fscanf(fp, "%d", &max_bright);
+    fscanf(fp, "%d\n", &max_bright);
 
 
     GreyMatrix *tmp = CreateGreyMat(x, y);
