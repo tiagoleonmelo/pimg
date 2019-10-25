@@ -166,7 +166,7 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 
     if (index1 < index2)
     {
-        printf("%d,%d,%d",index1,index2,dm->size);
+        //printf("%d,%d,%d",index1,index2,dm->size);
         jump = x1 + (dm->y - x2);
 
         for (int i = index1; i < index2; i++)
