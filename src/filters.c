@@ -93,77 +93,77 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
 }
 
 
-GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
-{
+// GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
+// {
 
-    GPx * ptr = dm->data;
-    GreyMatrix * ret = CreateGreyMat(dm->x, dm->y);
-    GPx *buffer = malloc(dm->size * sizeof(GPx));
-    GPx new_px;
-    int test = 0;
+//     GPx * ptr = dm->data;
+//     GreyMatrix * ret = CreateGreyMat(dm->x, dm->y);
+//     GPx *buffer = malloc(dm->size * sizeof(GPx));
+//     GPx new_px;
+//     int test = 0;
 
-    for(int i = 0; i < dm->size; i++)
-    {
+//     for(int i = 0; i < dm->size; i++)
+//     {
 
-        new_px = *(ptr);
+//         new_px = *(ptr);
 
 
-        test = new_px.r + value;
+//         test = new_px.r + value;
 
-        if (test > 255)
-        {
-            new_px.r = 255;
-        }
-        else if (test < 0)
-        {
-            new_px.r = 0;
-        }   
-        else
-        {
-            new_px.r += value;
-        }
+//         if (test > 255)
+//         {
+//             new_px.r = 255;
+//         }
+//         else if (test < 0)
+//         {
+//             new_px.r = 0;
+//         }   
+//         else
+//         {
+//             new_px.r += value;
+//         }
         
 
-        test = new_px.g + value;
+//         test = new_px.g + value;
 
-        if (test > 255)
-        {
-            new_px.g = 255;
-        }
-        else if (test < 0)
-        {
-            new_px.g = 0;
-        }
-        else
-        {
-            new_px.g += value;
-        }
+//         if (test > 255)
+//         {
+//             new_px.g = 255;
+//         }
+//         else if (test < 0)
+//         {
+//             new_px.g = 0;
+//         }
+//         else
+//         {
+//             new_px.g += value;
+//         }
         
 
-        test = new_px.b + value;
+//         test = new_px.b + value;
   
-        if (test > 255)
-        {
-            new_px.b = 255;
-        }
-        else if (test < 0)
-        {
-            new_px.b = 0;
-        } 
-        else
-        {
-            new_px.b += value;
-        }
+//         if (test > 255)
+//         {
+//             new_px.b = 255;
+//         }
+//         else if (test < 0)
+//         {
+//             new_px.b = 0;
+//         } 
+//         else
+//         {
+//             new_px.b += value;
+//         }
         
-        buffer[i] = new_px;
+//         buffer[i] = new_px;
 
-        ptr++;
+//         ptr++;
 
-    }
+//     }
 
-    ret->data = buffer;
+//     ret->data = buffer;
 
-    return ret;
-}
+//     return ret;
+// }
 
 

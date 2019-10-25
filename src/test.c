@@ -55,7 +55,7 @@ int main(void)
 
 
     // Accessing a RGB Matrix Region
-    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 512, 512);
+    DynamicMatrix * sub = AccessRegion(dm, 100, 100, 500, 500);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
 
