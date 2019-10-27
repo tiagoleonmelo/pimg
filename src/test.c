@@ -23,7 +23,6 @@
 
 int main(void)
 {   
-
     // Loading original image in RBG
     DynamicMatrix *dm = LoadFromFile("../res/lena.ppm");
     // Saving it on a different file
@@ -55,9 +54,8 @@ int main(void)
     PrintRGBPx(AccessRGBPx(dm, 511, 511));
     printf("\n");
 
-
     // Accessing a RGB Matrix Region
-    DynamicMatrix * sub = AccessRegion(dm, 100, 100, 500, 500);
+    DynamicMatrix * sub = AccessRegion(dm, 100, 100, 450, 450);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
 

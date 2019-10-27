@@ -140,13 +140,11 @@ RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
  * 
  */
 DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
-{
-
+{   
     int rows = x2 - x1+1;
     int cols = y2 - y1+1;
     int index1 = (x1 * dm->x) + y1;
     int index2 = (x2 * dm->x) + y2;
-
 
     // Lazy implementation of the abs() function
 
@@ -169,7 +167,8 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 
     if (index1 < index2)
     {
-        jump = x1 + (dm->y - x2);
+        //printf("%d,%d,%d",index1,index2,dm->size);
+        jump = dm->y-sub->y;
 
         for (int i = index1; i < index2; i++)
             {
@@ -181,7 +180,7 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
                 if(help == sub->y)
                 {
 
-                    i+=jump-1;
+                    i+=jump;
                     help = 0;
                 }
 
@@ -192,7 +191,7 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
     }
     else
     {
-        jump = x2 + (dm->y - x1);
+        jump = dm->y-sub->y;
 
         for (int i = index2; i < index1; i++)
             {
