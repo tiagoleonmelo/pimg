@@ -7,3 +7,5 @@ build/test
 build/filters.o
 res/*
 !res/lena.ppm
+!res/girl.ppm
+!res/peppers.ppm
