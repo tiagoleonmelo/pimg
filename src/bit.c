@@ -1,17 +1,25 @@
 /**
  * 
- * Bit Image Manipulation
- * 
- * The Bit module contains methods for reading, writing and manipulating bitmap images.
- * 
+ * <h2>Bit Image Manipulation</h2>
+ * <br>
+ * The Bit module contains methods for reading and writing bitmap images.
+ * <br>
  * It is worth mentioning that a Binary Image is internally saved as a Greyscale Image, and is
  * only converted to binary when reading from or writing to files. This way we can more easily
  * increase compatibility between modules and image access.
- * 
+ * <br>
  * At the time of writing, the feature of reading and writing .pbm files is not yet implemented.
  * Instead, everything is treated as .pgm. Ideally, this would be implemented, but right now
  * it's just TODO:.
- * 
+ * <br>
+ * Some attempts were made to implement a way to internally save Bitmaps, namely, an integer 
+ * array, in which each item would store 32 bits, resulting in an array of masks. This was not
+ * the option chosen, yet, the methods were not deleted and there is available documentation for
+ * each of them.
+ * <br>
+ * <b>In short</b>, binary image saving and loading were done with the Greyscale module. This module
+ * would be useful in possible future versions.
+ * <br>
  * @param Authors João Nogueira, Tiago Melo
  * 
  */
@@ -76,6 +84,9 @@ int * LoadBitMatFromFile(char * name)
  * 
  * Save a BitMap to a File
  * 
+ * Iterate over an array of masks and every 32 pixels processed, de-mask the integer and
+ * save it to a .pbm file.
+ * 
  */
 void SaveBitMatOnFile(unsigned int *mat, char *name, int size)
 {
@@ -128,7 +139,7 @@ void SaveBitMatOnFile(unsigned int *mat, char *name, int size)
 
 /**
  * 
- * Function that prints a BitMap matrix
+ * Prints a BitMap matrix @arg bmp of size @arg size
  * 
  */
 void PrintBitMat(unsigned int * bmp, int size)

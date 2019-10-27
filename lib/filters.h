@@ -3,10 +3,6 @@
  * Header that contains the appliable filters to an image
  * 
  * 
- * SUPPORTED OPERATIONS
- *  >Increase Saturation/Vibrance
- *  >
- * 
  */
 
 #ifndef INC_00_FILTERS_H
@@ -20,14 +16,17 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value);
 
 GreyMatrix * SaturateGrey(GreyMatrix * dm, int value);
 
+
 DynamicMatrix * FilterRGB(DynamicMatrix * gm, int kernel[], int size);
 
 GreyMatrix * FilterGrey(GreyMatrix * gm, int kernel[], int size);
 
 
+GreyMatrix * WatermarkGrey(GreyMatrix * gm, GreyMatrix * watermark, int x_start, int y_start);
 
 
 
+int GreyChecker(GreyMatrix * gm, int x0, int y0, int x1, int y1, int i);
 
 
 

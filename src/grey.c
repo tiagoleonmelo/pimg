@@ -1,8 +1,17 @@
 /**
  * 
- * GreyScale Image Manipulation
+ * <h2>GreyScale Image Manipulation</h2>
+ * <br>
+ * The GreyScale module contains methods for:<ul>
+ * <li>reading</li>
+ * <li>writing</li>
+ * <li>converting GreyScale images to "Bitmap"</li>
+ * </ul>
  * 
- * The GreyScale module contains methods for reading, writing and manipulating GreyScale images.
+ * Like it was explained in the @file bit.c module, a Bitmap is saved internally through
+ * usage of a Greyscale matrix. However, the methods developed when trying to implement another
+ * option (array of masks) were kept and properly documented, given that they can still be used
+ * in possible future versions.
  * 
  * @param Authors João Nogueira, Tiago Melo
  * 
@@ -38,7 +47,7 @@ GreyMatrix * CreateGreyMat(int rows, int cols)
 
 /**
  * 
- * Load a Greyscale Matrix from a file called name TODO: FIX THIS
+ * Load a Greyscale Matrix from a file called name
  * 
  */
 GreyMatrix * LoadGreyFromFile(char * name)
@@ -111,7 +120,7 @@ void PrintGreyMat(GreyMatrix * dm){
 
 /**
  * 
- * Access the position at [row][col] in the matrix dm
+ * Access the position at [ @arg row][ @arg col] in the matrix @arg dm
  * 
  */
 GPx * AccessGPx(GreyMatrix * dm, int row, int col){
@@ -122,17 +131,18 @@ GPx * AccessGPx(GreyMatrix * dm, int row, int col){
 
 /**
  * 
- * Print a Greyscale Pixel
+ * Print a Greyscale Pixel @arg px, which is just the grey component of it
  * 
  */
 void PrintGPx(GPx * px){
     printf("%d ", px->grey);
 }
 
+
 /**
  * 
- * Access a given ROI. Top left pixel is at (x1, y1) and bottom right pixel is
- * at (x2, y2). Returns the sub-matrix from dm that follows these conditions.
+ * Access a given ROI. Top left pixel is at ( @arg x1, @arg y1) and bottom right pixel is
+ * at ( @arg x2, @arg y2). Returns the sub-matrix from @arg dm that follows these conditions.
  * 
  */
 GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)
@@ -214,6 +224,50 @@ GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)
 }
 
 
+// Conversion Methods
+
+
+/**
+ * 
+ * Option chosen: instead of saving the image using bits, save it in greymap,
+ * where a 1 is replaced with 255 and a 0 replaced with 0.
+ * 
+ */
+GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold)
+{
+
+    GPx *source = gm->data;
+    GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
+    GPx new_px;
+    GPx buffer[gm->size];
+
+    for (int i = 0; i < gm->size; i++)
+    {
+
+        new_px = *source;
+
+        if (source->grey >= threshold)
+        {
+            new_px.grey = 255;
+        }
+        else
+        {
+            new_px.grey = 0;
+        }
+        
+        
+        buffer[i] = new_px;
+
+        source++;
+
+    }
+
+    ret->data = buffer;
+
+    return ret;
+
+}
+
 /**
  * 
  * 
@@ -267,49 +321,7 @@ unsigned int * ConvertToBitMat(GreyMatrix * gm)
     
 }
 
-/**
- * 
- * Big hack: instead of saving the image using bits, save it in greymap, where a 1 is replaced with
- * 255 and a 0 replaced with 0.
- * 
- * The bit array implementation explained above didnt quite work, 
- * so we went for this one instead.
- * 
- */
-GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold)
-{
 
-    GPx *source = gm->data;
-    GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
-    GPx new_px;
-    GPx buffer[gm->size];
-
-    for (int i = 0; i < gm->size; i++)
-    {
-
-        new_px = *source;
-
-        if (source->grey >= threshold)
-        {
-            new_px.grey = 255;
-        }
-        else
-        {
-            new_px.grey = 0;
-        }
-        
-        
-        buffer[i] = new_px;
-
-        source++;
-
-    }
-
-    ret->data = buffer;
-
-    return ret;
-
-}
 
 /**
  * 

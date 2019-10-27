@@ -1,8 +1,9 @@
 /**
  * 
+ * Test module - Driver code for testing every function developed on lena.ppm
  * 
- * Test module
  * 
+ * @param Authors João Nogueira, Tiago Melo
  * 
  */
 
@@ -24,13 +25,21 @@
 
 int main(void)
 {   
+
+    /*
+       *******************
+     Testing Basic Functions 
+       *******************
+    */
+
     // Loading original image in RBG
     DynamicMatrix *dm = LoadFromFile("../res/lena.ppm");
+
     // Saving it on a different file
     SaveOnFile(dm, "../res/savedRGB.ppm");
 
 
-    // Converting the original RGB image to greyscale in each of the color channels
+    // Converting the original RGB image to Greyscale in each of the color channels
     // and storing the results (NONE means default RGB-Greyscale conversion)
     GreyMatrix * grey = ConvertToGreyscale(dm, NONE);
     SaveGreyOnFile(grey, "../res/grey_lena.pgm");
@@ -55,23 +64,32 @@ int main(void)
     PrintRGBPx(AccessRGBPx(dm, 12, 12));
     printf("\n");
 
-    // Accessing a RGB Matrix Region
+    // Accessing a RGB Matrix ROI and saving it (cropping an image)
     DynamicMatrix * sub = AccessRegion(dm, 0, 0, 400, 400);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
 
 
-    // Accessing a Grey Matrix Region
+    // Accessing a Grey Matrix ROI and saving it (cropping an image)
     GreyMatrix * grey_sub = AccessGreyRegion(gm, 0, 0, 400, 400);
     // PrintMat(sub);
     SaveGreyOnFile(grey_sub, "../res/cropped_grey_lena.pgm");
 
 
+    // Converting a Greyscale image to "Bitmap", according to a given threshold
     int threshold = 100;
     GreyMatrix * bmp = ConvertToBitGreyMat(gm, threshold);
     // PrintGreyMat(bmp);
     SaveGreyOnFile(bmp, "../res/bit_lena.pgm");
 
+
+    /*
+       **********
+     Testing Filters 
+       **********
+    */
+
+    // Saturation
 
     DynamicMatrix * saturated = Saturate(dm, -100);
     SaveOnFile(saturated, "../res/saturated_lena.ppm");
@@ -82,20 +100,42 @@ int main(void)
     SaveGreyOnFile(saturated_grey, "../res/saturated_lena_grey.pgm");
 
 
+    // Filtering: edge detection, blur and averaging
+
     // Edge detection Kernel
-    int kernel[9] = {
+    int edge_detection[9] = {
+                        -1, -1, -1,
+                        -1, 8, -1,
+                        -1, -1, -1
+                    };
+
+    // Blur Kernel
+    int blur[9] = {
                         1, 1, 1,
                         1, 1, 1,
                         1, 1, 1
                     };
 
-    DynamicMatrix * filterRGB = FilterRGB(dm, kernel, 9);
-    SaveOnFile(filterRGB, "../res/filteredRGB_lena.ppm");
+    DynamicMatrix * edge = FilterRGB(dm, edge_detection, 9);
+    SaveOnFile(edge, "../res/edge_detection_lena.ppm");
 
-    GreyMatrix * filtered = FilterGrey(gm, kernel, AVERAGE);
-    SaveGreyOnFile(filtered, "../res/filtered_lena.pgm");
+    DynamicMatrix * blurred = FilterRGB(dm, blur, 9);
+    SaveOnFile(blurred, "../res/blurry_lena.ppm");
+
+    GreyMatrix * filtered = FilterGrey(gm, edge_detection, AVERAGE);
+    SaveGreyOnFile(filtered, "../res/averaged_lena.pgm");
 
 
+    // Watermarking
+
+    DynamicMatrix * rgb_girl = LoadFromFile("../res/girl.ppm");
+    GreyMatrix * girl = ConvertToGreyscale(rgb_girl, NONE);
+    GreyMatrix * cropped_girl = AccessGreyRegion(girl, 0, 0, 255, 255);
+    SaveGreyOnFile(cropped_girl, "../res/cropped_grey_girl.pgm");
+
+    GreyMatrix * watermarked = WatermarkGrey(gm, cropped_girl, 120, 120);
+
+    SaveGreyOnFile(watermarked, "../res/watermarked_lena.pgm");
 
 
     return 0;

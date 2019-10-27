@@ -1,8 +1,15 @@
 /**
  * 
- * Filters module.
+ * <h2>Filters module</h2>
  * 
- * Contains the implementation of the available functions to manipulate image data
+ * Contains the implementation of the available functions to manipulate image data, namely:<ul>
+ * <li>Kernel Filters</li>
+ * <li>Manipulating brightness</li>
+ * <li>Watermarking</li>
+ * 
+ * It is worth mentioning these methods are only appliable to images that arent Bitmap (i. e.
+ * RGB and Greyscale). The current implementation allows a user to pass a Bitmap-Greyscale image
+ * as arguments but it simply doesn't work as it's meant to. 
  * 
  * @param Authors João Nogueira, Tiago Melo
  * 
@@ -377,4 +384,76 @@ GreyMatrix * FilterGrey(GreyMatrix * gm, int kernel[], int kernel_size)
 
 }
 
+
+
+/**
+ * 
+ * Returns a watermarked version of the Greyscale image @arg gm 
+ * with the watermark @arg watermark
+ *  
+ * Assumes watermark is already smaller than gm (doesn't support watermark resizing)
+ * 
+ * We could have done this with ROIs but, in our opinion, this way is simpler
+ * 
+ */
+GreyMatrix * WatermarkGrey(GreyMatrix * gm, GreyMatrix * watermark, int x_start, int y_start)
+{
+
+    GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
+
+    GPx * img_source = gm->data;
+    GPx * wm_source = watermark->data;
+    GPx * buffer = malloc(ret->size * sizeof(GPx));
+
+    GPx img_px, wm_px, result;
+
+    int counter = 0;
+
+
+    for(int i = 0; i < gm->size; i++)
+    {
+
+        // Checking if i is within the bounds of the ROI
+        if(GreyChecker(gm, x_start, y_start, x_start + watermark->x + 1, y_start + watermark->y + 1, i))
+        {
+
+            img_px = img_source[i];
+            wm_px = wm_source[counter];
+            result.grey = img_px.grey * 0.65 + wm_px.grey * 0.35;
+
+            buffer[i] = result;
+
+            counter++;
+
+        }
+        else
+        {
+
+            buffer[i] = img_source[i];
+
+        }
+
+    }
+
+
+    ret->data = buffer;
+
+    return ret;
+
+}
+
+/**
+ * 
+ * Returns 1 if @arg i is between the bounds set by @arg x0 @arg y0 @arg x1 @arg y1 and 0
+ * if not in the matrix @arg gm
+ * 
+ */
+int GreyChecker(GreyMatrix * gm, int x0, int y0, int x1, int y1, int i)
+{
+    int x = i / gm->x;
+    int y = i % gm->x;
+    
+    return (x0 < x) && (x < x1) && (y0 < y) && (y < y1);
+
+}
 

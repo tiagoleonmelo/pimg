@@ -1,8 +1,12 @@
 /**
  * 
- * RBG Image Manipulation
+ * <h2>RBG Image Manipulation</h2>
  * 
- * The RBG module contains methods for reading, writing and manipulating standard colored RGB images.
+ * The RBG module contains methods for<ul>
+ * <li>reading</li>
+ * <li>writing</li>
+ * <li>converting RGB images to Greyscale</li>
+ * </ul>
  * 
  * @param Authors João Nogueira, Tiago Melo
  * 
@@ -20,7 +24,11 @@
 
 /**
  * 
- * Create a RGB Matrix
+ * Create a RGB Matrix, composed of RGBPixels
+ * 
+ * The matrix to return has @arg rows rows and @arg cols columns.
+ * 
+ * Its maximum RGB value is given by @arg max_bright
  * 
  */
 DynamicMatrix * CreateMat(int rows, int cols, int max_bright)
@@ -45,7 +53,7 @@ DynamicMatrix * CreateMat(int rows, int cols, int max_bright)
 
 /**
  * 
- * Load a RGB Matrix from file called name
+ * Load a RGB Matrix from file called @arg name
  * 
  */
 DynamicMatrix * LoadFromFile(char *name)
@@ -80,7 +88,7 @@ DynamicMatrix * LoadFromFile(char *name)
 
 /**
  * 
- * Save a RGB Matrix dm to file called name
+ * Save a RGB Matrix @arg dm to file called @arg name
  * 
  */
 void SaveOnFile(DynamicMatrix *dm, char *name)
@@ -103,7 +111,7 @@ void SaveOnFile(DynamicMatrix *dm, char *name)
 
 /**
  * 
- * Print a RGB Matrix dm on the console
+ * Print a RGB Matrix @arg dm on the console
  * 
  */
 void PrintMat(DynamicMatrix *dm)
@@ -122,7 +130,7 @@ void PrintMat(DynamicMatrix *dm)
 
 /**
  * 
- * Access the position at [row][col] in the matrix dm
+ * Access the position at [ @arg row][ @arg col] in the matrix @arg dm
  * 
  */
 RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
@@ -133,8 +141,8 @@ RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
 
 /**
  * 
- * Access a given ROI. Top left pixel is at (x1, y1) and bottom right pixel is
- * at (x2, y2). Returns the sub-matrix from dm that follows these conditions.
+ * Access a given ROI. Top left pixel is at ( @arg x1, @arg y1) and bottom right pixel is
+ * at ( @arg x2, @arg y2). Returns the sub-matrix from @arg dm that follows these conditions.
  * 
  * The current version only supports cropping squares, for reasons unknown to mankind.
  * 
@@ -167,7 +175,6 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 
     if (index1 < index2)
     {
-        //printf("%d,%d,%d",index1,index2,dm->size);
         jump = dm->y-sub->y;
 
         for (int i = index1; i < index2; i++)
@@ -228,15 +235,22 @@ void PrintRGBPx(RGBPx *px)
     printf("[ %d, %d, %d ]", px->r, px->g, px->b);
 }
 
-//convertion
+
+
+// Convertion Methods
 
 /**
  * 
- * Function that converts an RGB Matrix dm to a Greyscale matrix
+ * Function that converts an RGB Matrix @arg dm to a Greyscale matrix
  * and returns it.
  * 
  * Essentially, it iterates through the RGB data, converts it and stores it in
  * a buffer. This buffer is then used as the new Greyscale Matrix's data.
+ * 
+ * @arg channel is an argument that allows the user to select a channel of color into which
+ * the RGB Matrix will be split. If NONE is specified, the Greyscale image generated will be
+ * an overlap of the Red, Green and Blue Greyscale images.
+ * 
  * 
  */
 GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm, int channel)
@@ -269,6 +283,11 @@ GreyMatrix * ConvertToGreyscale(DynamicMatrix *dm, int channel)
 /**
  * 
  * Convert an RGB pixel into a Greyscale pixel, by means of color component averaging
+ * 
+ * @arg channel follows the same logic as above, i. e., when NONE is specified, @arg px will be
+ * converted using a formula that takes into consideration every color component. Otherwise, it
+ * considers only the color component given.
+ * 
  * 
  */
 GPx * ConvertPX(RGBPx * px, int channel)
