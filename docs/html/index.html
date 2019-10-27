@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pimg: Main Page</title>
+<title>pimg: &lt;h1&gt;pimg - Image Processing software&lt;/h1&gt;</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
    <div id="projectname">pimg
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">C based Image Processing software</div>
+   <div id="projectbrief">C based Image Processing Software</div>
   </td>
  </tr>
  </tbody>
@@ -63,11 +63,36 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">pimg Documentation</div>  </div>
+<div class="title"><h1>pimg - Image Processing software</h1>
+</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p>pimg is a C-based, simple project that allows a user the manipulate images that respect the PNM format, i. e., RGB images in .ppm, Greyscale images in .pgm and managing <a class="el" href="struct_bit_map.html">BitMap</a> images. <br  />
+</p>
+<p>Core functionalities of the app include: structures that support the interal storage RGB, Greyscale and Binary Matrixes thanks to the structures <a class="el" href="struct_r_g_b_px.html">RGBPx</a> and <a class="el" href="struct_g_px.html">GPx</a>. Each of the matrixes has file compatibility, i. e., can be saved to and loaded from files, supports individual pixel access and ROI access. It is worth mentioning that the ROI functionality is only supported for cropping squares from images.</p>
+<p>Furthermore, pimg also allows the user to convert from RGB to Greyscale and from Greyscale to Binary with a user given threshold. However, the Binary implementation is merely a Greyscale image in which every <a class="el" href="struct_g_px.html">GPx</a> has a grey component of either 0 or 255. In future versions, Binary to file compability is a must.</p>
+<p>There is also the option to apply a few filters to an RGB or Greyscale image. These include:</p><ul>
+<li>
+Increasing or decreasing the brightness; </li>
+<li>
+A user defined kernel filter, which in turn means the user can choose to blur, sharpen or detect edges when using the proper kernel; </li>
+<li>
+Watermarking a picture, however, this feature allows only a user to apply a watermark that is already smaller than the picture to be watermarked </li>
+</ul>
+<p>Features yet to be included in future versions:</p><ul>
+<li>
+Selecting rectangles as Regions of Interest </li>
+<li>
+Filtering rectangle images </li>
+<li>
+Read from and write to .pbm files </li>
+<li>
+Resizing watermarks </li>
+</ul>
+<dl class="section author"><dt>Authors</dt><dd>João Nogueira, Tiago Melo </dd></dl>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

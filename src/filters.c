@@ -14,6 +14,10 @@
  * @param Authors João Nogueira, Tiago Melo
  * 
  */
+
+/**
+ * 
+ */
 #include "../lib/rgb.h"
 #include "../lib/grey.h"
 #include "../lib/bit.h"

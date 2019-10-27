@@ -1,6 +1,6 @@
 /**
  * 
- * <h2>Bit Image Manipulation</h2>
+ * \file <h2>Bit Image Manipulation</h2>
  * <br>
  * The Bit module contains methods for reading and writing bitmap images.
  * <br>
@@ -24,6 +24,9 @@
  * 
  */
 
+/**
+ * 
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include "../lib/bit.h"

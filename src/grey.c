@@ -1,6 +1,6 @@
 /**
  * 
- * <h2>GreyScale Image Manipulation</h2>
+ * \file <h2>GreyScale Image Manipulation</h2>
  * <br>
  * The GreyScale module contains methods for:<ul>
  * <li>reading</li>
@@ -17,6 +17,9 @@
  * 
  */
 
+/**
+ * 
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include "../lib/grey.h"

@@ -11,6 +11,10 @@
  * @param Authors João Nogueira, Tiago Melo
  * 
  */
+
+/**
+ * 
+ */
 #include <stdlib.h>
 #include <stdio.h>
 #include "../lib/rgb.h"

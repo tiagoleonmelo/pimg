@@ -1,12 +1,58 @@
+/** \mainpage <h1>pimg - Image Processing software</h1>
+ * 
+ * pimg is a C-based, simple project that allows a user the manipulate images that respect
+ * the PNM format, i. e., RGB images in .ppm, Greyscale images in .pgm and managing BitMap
+ * images. <br>
+ * 
+ * Core functionalities of the app include: structures that support the interal storage RGB,
+ * Greyscale and Binary Matrixes thanks to the structures RGBPx and GPx. Each of the matrixes
+ * has file compatibility, i. e., can be saved to and loaded from files, supports individual
+ * pixel access and ROI access. It is worth mentioning that the ROI functionality is only
+ * supported for cropping squares from images.
+ * 
+ * Furthermore, pimg also allows the user to convert from RGB to Greyscale and from Greyscale
+ * to Binary with a user given threshold. However, the Binary implementation is merely a 
+ * Greyscale image in which every GPx has a grey component of either 0 or 255. In future 
+ * versions, Binary to file compability is a must.
+ * 
+ * There is also the option to apply a few filters to an RGB or Greyscale image. These include:<ul>
+ * <li>Increasing or decreasing the brightness;</li>
+ * <li>A user defined kernel filter, which in turn means the user can choose to blur, sharpen or
+ * detect edges when using the proper kernel;</li>
+ * <li>Watermarking a picture, however, this feature allows only a user to apply a watermark
+ * that is already smaller than the picture to be watermarked</li>
+ * </ul>
+ * 
+ * Features yet to be included in future versions:<ul>
+ * <li>Selecting rectangles as Regions of Interest</li>
+ * <li>Filtering rectangle images</li>
+ * <li>Read from and write to .pbm files</li>
+ * <li>Resizing watermarks</li>
+ * </ul>
+ * 
+ * 
+ * \authors João Nogueira, Tiago Melo
+ * 
+ * 
+ * 
+ */
+
+
+
 /*!
  * 
- * Test module - Driver code for testing every function developed on lena.ppm
+ * <h2>Test module</h2>
+ * Driver code for testing every function developed on lena.ppm
  * 
  * 
  * @param Authors João Nogueira, Tiago Melo
  * 
  */
 
+
+/**
+ *  
+ */
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>

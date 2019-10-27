@@ -25,7 +25,7 @@
    <div id="projectname">pimg
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">C based Image Processing software</div>
+   <div id="projectbrief">C based Image Processing Software</div>
   </td>
  </tr>
  </tbody>
@@ -94,17 +94,7 @@ Functions</h2></td></tr>
 <tr class="separator:a64b320bc52749c36888768f7519b80cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h2>GreyScale Image Manipulation</h2>
-<p><br  />
- The GreyScale module contains methods for:</p><ul>
-<li>
-reading </li>
-<li>
-writing </li>
-<li>
-converting GreyScale images to "Bitmap" </li>
-</ul>
-<p>Like it was explained in the module, a Bitmap is saved internally through usage of a Greyscale matrix. However, the methods developed when trying to implement another option (array of masks) were kept and properly documented, given that they can still be used in possible future versions.</p>
+<div class="textblock"><p>module, a Bitmap is saved internally through usage of a Greyscale matrix. However, the methods developed when trying to implement another option (array of masks) were kept and properly documented, given that they can still be used in possible future versions.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">Authors</td><td>João Nogueira, Tiago Melo </td></tr>
@@ -137,19 +127,7 @@ converting GreyScale images to "Bitmap" </li>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="el" href="struct_bit.html">Bit</a> Image Manipulation</h2>
-<p><br  />
- The <a class="el" href="struct_bit.html">Bit</a> module contains methods for reading and writing bitmap images. <br  />
- It is worth mentioning that a Binary Image is internally saved as a Greyscale Image, and is only converted to binary when reading from or writing to files. This way we can more easily increase compatibility between modules and image access. <br  />
- At the time of writing, the feature of reading and writing .pbm files is not yet implemented. Instead, everything is treated as .pgm. Ideally, this would be implemented, but right now it's just TODO:. <br  />
- Some attempts were made to implement a way to internally save Bitmaps, namely, an integer array, in which each item would store 32 bits, resulting in an array of masks. This was not the option chosen, yet, the methods were not deleted and there is available documentation for each of them. <br  />
- <b>In short</b>, binary image saving and loading were done with the Greyscale module. This module would be useful in possible future versions. <br  />
- </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Authors</td><td>João Nogueira, Tiago Melo Straight-forward memory allocation. However, maybe it would be a good idea to associate each pointer with another pointer to the end of the array. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Straight-forward memory allocation. However, maybe it would be a good idea to associate each pointer with another pointer to the end of the array. </p>
 
 </div>
 </div>
