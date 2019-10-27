@@ -111,6 +111,7 @@ GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
     GPx new_px;
     int test = 0;
 
+
     for(int i = 0; i < dm->size; i++)
     {
 
@@ -151,22 +152,83 @@ GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
 GreyMatrix * Filter(GreyMatrix * gm, int kernel_side)
 {
 
-    // Allocating enough memory for a small matrix of side=kernel_side that will "absorb"
-    // the gm's pixels
-    GPx * buffer = malloc(kernel_side * kernel_side * sizeof(GPx));
+    GPx buffer[gm->size];
     GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
     GPx * source = gm->data;
+    GPx new_px;
+
+    int kernel[9] = {
+                        -1, -1, -1,
+                        -1, 8, -1,
+                        -1, -1, -1
+                    };
+
+    int x, y;
+    int new_grey = 0;
+    int counter = 0;
+
+    // for(int i = 0; i < gm->size; i++)
+    // {
+
+    //     x = i / gm->x;
+    //     y = i % gm->y;
+
+
+    //     for(int g = -1; g < 2; g++)
+    //     {
+    //         for(int f = -1; f < 2; f++)
+    //         {
+
+    //             if ((x + f) < 0 || (x + f) > gm->x || (y + g) < 0 || (y + g) > gm->y)
+    //             {
+    //                 new_px->grey += 255;
+    //             }
+    //             else
+    //             {
+    //                 new_px->grey += kernel[counter] * source[((x+g) * gm->x) + (y+f)].grey;
+    //                 // printf("OLOLOL\n");
+
+    //             }
+
+    //             counter++;
+    //             // printf("COUNTER %d\n", counter);
+   
+    //         }
+            
+    //     }
+
+    //     new_px->grey /= 10;
+
+    //     // new_px->grey = (unsigned char) new_grey;
+
+
+    //     buffer[i] = *new_px;
+    //     // printf("%d : %d,", i, new_grey);
+
+    //     source++;
+    //     new_grey = 0;
+    //     counter = 0;
+    // }
 
     for(int i = 0; i < gm->size; i++)
     {
         
-        buffer[i] = PxAverage(i, gm, kernel_side);
+        new_px = *source;
+        x = i / gm->x;
+        y = i % gm->y;
+        
+        buffer[i] = new_px;
+
         source++;
     }
 
+    // buffer = gm -> data;
     ret->data = buffer;
 
+    return ret;
+
 }
+
 
 
 /**
@@ -180,30 +242,42 @@ GreyMatrix * Filter(GreyMatrix * gm, int kernel_side)
  * Accessing every pixel we want we can now calculate the average and return it
  * 
  */
-GPx PxAverage(int idx_center, GreyMatrix * gm, int kernel_side)
-{
+// GPx PxAverage(int idx_center, GreyMatrix * gm, int kernel_side)
+// {
 
-    int x = idx_center / gm->x;
-    int y = idx_center % gm->y;
-    int kernel_size = kernel_side*kernel_side;
+//     int kernel_size = kernel_side*kernel_side;
+   
+//     int x = idx_center / gm->x;
+//     int y = idx_center % gm->y;
 
-    // (x,y) is now the center of our kernel
-    // Now we just need to spin around it
+//     // (x,y) is now the center of our kernel
+//     // Now we just need to spin around it
 
-    // Coordinates of a target pixel inside the kernel
-    int x_target, y_target;
-    int target_idx;
+//     // Coordinates of a start pixel inside the kernel (top left)
+//     // and end pixel (bottom right)
+//     int x_start, y_start;
+//     int x_end, y_end;
 
-    // Buffer that will be used later to calculate the average of grey colors
-    GPx * buffer = malloc(kernel_size * sizeof(GPx));
+//     x_start = x - kernel_side/2;
+//     y_start = y - kernel_side/2;
 
-    for(int i = 0; i < kernel_size; i++)
-    {
+//     x_end = x + kernel_side/2;
+//     y_end = y + kernel_side/2;
+
+//     int target_idx;
+
+//     GreyMatrix * kernel = AccessGreyRegion(gm, x_start, y_start, x_end, y_end);
+
+//     // Buffer that will be used later to calculate the average of grey colors
+//     GPx * buffer = malloc(kernel_size * sizeof(GPx));
+
+//     for(int i = 0; i < kernel_size; i++)
+//     {
 
 
-        buffer[i] = gm->data[target_idx];
+//         buffer[i] = gm->data[target_idx];
 
-    }
+//     }
 
-}
+// }
 

@@ -28,7 +28,7 @@ int main(void)
     DynamicMatrix *dm = LoadFromFile("../res/lena.ppm");
     // Saving it on a different file
     SaveOnFile(dm, "../res/savedRGB.ppm");
-    printf("%d \n", dm->size);
+
 
     // Converting the original RGB image to greyscale in each of the color channels
     // and storing the results (NONE means default RGB-Greyscale conversion)
@@ -44,7 +44,8 @@ int main(void)
     GreyMatrix * blue = ConvertToGreyscale(dm, BLUE);
     SaveGreyOnFile(blue, "../res/blue_lena.pgm");
 
-    // Loading GreyScale image //TODO: MAYBE USE A DIFFERENT IMAGE? mudei a ordem
+
+    // Loading GreyScale image
     GreyMatrix * gm = LoadGreyFromFile("../res/grey_lena.pgm");
     // Saving it on a different file
     SaveGreyOnFile(gm, "../res/savedGrey.pgm");
@@ -56,9 +57,15 @@ int main(void)
 
 
     // Accessing a RGB Matrix Region
-    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 512, 512);
+    DynamicMatrix * sub = AccessRegion(dm, 100, 100, 500, 500);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
+
+
+    // Accessing a Grey Matrix Region
+    GreyMatrix * grey_sub = AccessGreyRegion(gm, 100, 100, 500, 500);
+    // PrintMat(sub);
+    SaveGreyOnFile(grey_sub, "../res/cropped_grey_lena.pgm");
 
 
     int threshold = 100;
@@ -74,6 +81,11 @@ int main(void)
 
     GreyMatrix * saturated_grey = SaturateGrey(gm, 100);
     SaveGreyOnFile(saturated_grey, "../res/saturated_lena_grey.pgm");
+
+
+    GreyMatrix * filtered = Filter(gm, 3);
+    SaveGreyOnFile(filtered, "../res/filtered_lena.pgm");
+
 
 
 

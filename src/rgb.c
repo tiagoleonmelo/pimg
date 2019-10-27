@@ -133,14 +133,17 @@ RGBPx * AccessRGBPx(DynamicMatrix * dm, int row, int col){
 
 /**
  * 
- * DOESN'T WORK
+ * Access a given ROI. Top left pixel is at (x1, y1) and bottom right pixel is
+ * at (x2, y2). Returns the sub-matrix from dm that follows these conditions.
+ * 
+ * The current version only supports cropping squares, for reasons unknown to mankind.
  * 
  */
 DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 {
 
-    int rows = x2 - x1 + 1;
-    int cols = y2 - y1 + 1;
+    int rows = x2 - x1+1;
+    int cols = y2 - y1+1;
     int index1 = (x1 * dm->x) + y1;
     int index2 = (x2 * dm->x) + y2;
 
@@ -158,7 +161,7 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
     }
 
     DynamicMatrix * sub = CreateMat(rows, cols, dm->max_bright);
-    RGBPx buffer[sub->size]; //
+    RGBPx buffer[sub->size];
 
     int counter = 0;
     int jump;
@@ -177,7 +180,8 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 
                 if(help == sub->y)
                 {
-                    i+=jump;
+
+                    i+=jump-1;
                     help = 0;
                 }
 
@@ -199,7 +203,7 @@ DynamicMatrix * AccessRegion(DynamicMatrix *dm, int x1, int y1, int x2, int y2)
 
                 if(help == sub->y)
                 {
-                    i+=jump;
+                    i+=jump-1;
                     help = 0;
                 }
             }

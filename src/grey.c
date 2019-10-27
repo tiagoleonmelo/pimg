@@ -73,9 +73,7 @@ GreyMatrix * LoadGreyFromFile(char * name)
 
 /**
  * 
- * Save a Greyscale Matrix gm to a file called name TODO: FIX THIS
- * Right now this is saving three images for some reason? IDK Error might be in
- * conversion
+ * Save a Greyscale Matrix gm to a file called name
  * 
  */
 void SaveGreyOnFile(GreyMatrix *gm, char *name)
@@ -131,6 +129,90 @@ void PrintGPx(GPx * px){
     printf("%d ", px->grey);
 }
 
+/**
+ * 
+ * Access a given ROI. Top left pixel is at (x1, y1) and bottom right pixel is
+ * at (x2, y2). Returns the sub-matrix from dm that follows these conditions.
+ * 
+ */
+GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)
+{
+
+    int rows = x2 - x1+1;
+    int cols = y2 - y1+1;
+    int index1 = (x1 * dm->x) + y1;
+    int index2 = (x2 * dm->x) + y2;
+
+
+    // Lazy implementation of the abs() function
+
+    if (rows < 0)
+    {
+        rows *= -1;
+    }
+    
+    if (cols < 0)
+    {
+        cols *= -1;
+    }
+
+    GreyMatrix * sub = CreateGreyMat(rows, cols);
+    GPx buffer[sub->size];
+
+    int counter = 0;
+    int jump;
+    int help = 0;
+
+    if (index1 < index2)
+    {
+        jump = x1 + (dm->y - x2);
+
+        for (int i = index1; i < index2; i++)
+            {
+                // Update buffer data
+                buffer[counter] = dm->data[i];
+                counter++;
+                help++;
+
+                if(help == sub->y)
+                {
+
+                    i+=jump-1;
+                    help = 0;
+                }
+
+            }
+
+        sub->data = buffer;
+
+    }
+    else
+    {
+        jump = x2 + (dm->y - x1);
+
+        for (int i = index2; i < index1; i++)
+            {
+                // Update buffer data
+                buffer[counter] = dm->data[i];
+                counter++;
+                help++;
+
+                if(help == sub->y)
+                {
+                    i+=jump-1;
+                    help = 0;
+                }
+            }
+
+        sub->data = buffer;
+
+    }
+    
+
+    return sub;
+    
+}
+
 
 /**
  * 
@@ -142,6 +224,10 @@ void PrintGPx(GPx * px){
  * creates a Bit based on that operation.
  * 
  * An array of masks is then returned
+ * 
+ * This method is not used in the current implementation, however it can still be relevant
+ * in a possible future version.
+ * 
  * 
  */
 unsigned int * ConvertToBitMat(GreyMatrix * gm)
@@ -175,12 +261,6 @@ unsigned int * ConvertToBitMat(GreyMatrix * gm)
         buffer[i] = new_px;
 
     }
-
-
-    // for(int i = 0; i < gm->size/32; i++){
-    //     printf("%u; ", buffer[i]);
-    // }
-
 
     
     return buffer;
@@ -240,6 +320,9 @@ GreyMatrix * ConvertToBitGreyMat(GreyMatrix * gm, int threshold)
  * If we have the pixels 1 6 7 10 and the threshold is 5 the resulting 4 bits will be
  * 
  * 0 1 1 1
+ * 
+ * This method is not used in the current implementation, however it can still be relevant
+ * in a possible future version.
  * 
  * 
  */
