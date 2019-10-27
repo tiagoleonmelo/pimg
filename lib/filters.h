@@ -20,9 +20,9 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value);
 
 GreyMatrix * SaturateGrey(GreyMatrix * dm, int value);
 
+DynamicMatrix * FilterRGB(DynamicMatrix * gm, int kernel[], int size);
 
-
-GreyMatrix * Filter(GreyMatrix * gm, int size);
+GreyMatrix * FilterGrey(GreyMatrix * gm, int kernel[], int size);
 
 
 

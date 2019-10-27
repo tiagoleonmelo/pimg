@@ -2,7 +2,7 @@ all: test
 
 test: rgb.o grey.o bit.o test.o filters.o
 
-	gcc -o test test.o rgb.o grey.o bit.o filters.o
+	gcc -o test test.o rgb.o grey.o bit.o filters.o -lm
 
 
 test.o: ../src/test.c
@@ -22,7 +22,7 @@ bit.o: ../src/bit.c
 
 
 filters.o: ../src/filters.c
-	gcc -o filters.o -c ../src/filters.c -W -Wall
+	gcc -o filters.o -c ../src/filters.c -W -Wall -lm
 
 
 clean:

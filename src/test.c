@@ -15,6 +15,7 @@
 #include "../lib/grey.h"
 #include "../lib/bit.h"
 
+#define AVERAGE -1
 #define NONE 0
 #define RED 1
 #define GREEN 2
@@ -51,17 +52,17 @@ int main(void)
 
 
     // Accessing a single pixel in RGB format
-    PrintRGBPx(AccessRGBPx(dm, 511, 511));
+    PrintRGBPx(AccessRGBPx(dm, 12, 12));
     printf("\n");
 
     // Accessing a RGB Matrix Region
-    DynamicMatrix * sub = AccessRegion(dm, 100, 100, 450, 450);
+    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 400, 400);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
 
 
     // Accessing a Grey Matrix Region
-    GreyMatrix * grey_sub = AccessGreyRegion(gm, 100, 100, 500, 500);
+    GreyMatrix * grey_sub = AccessGreyRegion(gm, 0, 0, 400, 400);
     // PrintMat(sub);
     SaveGreyOnFile(grey_sub, "../res/cropped_grey_lena.pgm");
 
@@ -81,7 +82,17 @@ int main(void)
     SaveGreyOnFile(saturated_grey, "../res/saturated_lena_grey.pgm");
 
 
-    GreyMatrix * filtered = Filter(gm, 3);
+    // Edge detection Kernel
+    int kernel[9] = {
+                        1, 1, 1,
+                        1, 1, 1,
+                        1, 1, 1
+                    };
+
+    DynamicMatrix * filterRGB = FilterRGB(dm, kernel, 9);
+    SaveOnFile(filterRGB, "../res/filteredRGB_lena.ppm");
+
+    GreyMatrix * filtered = FilterGrey(gm, kernel, AVERAGE);
     SaveGreyOnFile(filtered, "../res/filtered_lena.pgm");
 
 

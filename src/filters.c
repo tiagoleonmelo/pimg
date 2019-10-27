@@ -13,7 +13,9 @@
 #include "../lib/filters.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
+#define AVERAGE -1
 #define NONE 0
 #define RED 1
 #define GREEN 2
@@ -22,6 +24,10 @@
 /**
  * 
  * Manipulating brightness levels for RGB Images
+ * 
+ * @arg value is added to each of the @arg dm pixels.
+ * 
+ * In this case, each channel of an RGB pixel is the result of this sum
  * 
  */
 DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
@@ -101,6 +107,11 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
  * 
  * Manipulating brightness levels for Greyscale Images
  * 
+ * @arg value is added to each of the @arg dm pixels.
+ * 
+ * In this case, each Greyscale pixel of the resulting matrix is the result of the sum between
+ * the dm's pixel and value.
+ * 
  */
 GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
 {
@@ -148,81 +159,113 @@ GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
 
 
 
-
-GreyMatrix * Filter(GreyMatrix * gm, int kernel_side)
+/**
+ * 
+ * Filter function
+ * 
+ * Applies a square kernel, of odd side, to the RGB image passed as @arg gm.
+ *  
+ * @arg kernel_size can assume a special value of -1 to apply an average filter to the whole image
+ * It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option
+ * was chosen given that a larger kernel would hinder the effects of the filter function.
+ * 
+ * However, a possible implementation that would allow variation of kernel sizes would be to
+ * pass @arg kernel_size as a negative value and use the abs() of that value as the kernel size.
+ * This way the user could pass a variable kernel to apply an average filter. We chose not to
+ * do this.
+ * 
+ */
+DynamicMatrix * FilterRGB(DynamicMatrix * gm, int kernel[], int kernel_size)
 {
 
-    GPx buffer[gm->size];
-    GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
-    GPx * source = gm->data;
-    GPx new_px;
+    // Checking if our kernel has the right dimensions (perfect square and odd number as side)
+    if((kernel_size != AVERAGE) && (sqrt(kernel_size) != floor(sqrt(kernel_size)) || (int) sqrt(kernel_size) % 2 != 1))
+    {
+        printf("ERROR: Unsupported operation for the given Kernel, returning original matrix\n");
+        return gm;
+    }
 
-    int kernel[9] = {
-                        -1, -1, -1,
-                        -1, 8, -1,
-                        -1, -1, -1
-                    };
+    // If we get here, we can safely cast to int
+    int kernel_side = (int) sqrt(kernel_size);
 
+    // Getting up and lower bounds, with which we will apply our kernel to the image
+    int up = kernel_side/2 + 1;
+    int down = - kernel_side/2;
+
+    if (kernel_size == AVERAGE)
+    {
+        up = 2;
+        down = -1;
+    }
+
+    // Data fetching and storing variables
+    RGBPx buffer[gm->size];
+    DynamicMatrix * ret = CreateMat(gm->x, gm->y, gm->max_bright);
+    RGBPx * source = gm->data;
+    RGBPx *new_px = malloc(sizeof(RGBPx));
+
+    // Tracking variables, useful for positions and counting
     int x, y;
-    int new_grey = 0;
+    int new_red = 0;
+    int new_green = 0;
+    int new_blue = 0;
     int counter = 0;
-
-    // for(int i = 0; i < gm->size; i++)
-    // {
-
-    //     x = i / gm->x;
-    //     y = i % gm->y;
-
-
-    //     for(int g = -1; g < 2; g++)
-    //     {
-    //         for(int f = -1; f < 2; f++)
-    //         {
-
-    //             if ((x + f) < 0 || (x + f) > gm->x || (y + g) < 0 || (y + g) > gm->y)
-    //             {
-    //                 new_px->grey += 255;
-    //             }
-    //             else
-    //             {
-    //                 new_px->grey += kernel[counter] * source[((x+g) * gm->x) + (y+f)].grey;
-    //                 // printf("OLOLOL\n");
-
-    //             }
-
-    //             counter++;
-    //             // printf("COUNTER %d\n", counter);
-   
-    //         }
-            
-    //     }
-
-    //     new_px->grey /= 10;
-
-    //     // new_px->grey = (unsigned char) new_grey;
-
-
-    //     buffer[i] = *new_px;
-    //     // printf("%d : %d,", i, new_grey);
-
-    //     source++;
-    //     new_grey = 0;
-    //     counter = 0;
-    // }
 
     for(int i = 0; i < gm->size; i++)
     {
-        
-        new_px = *source;
+
         x = i / gm->x;
         y = i % gm->y;
-        
-        buffer[i] = new_px;
+
+
+        for(int g = down; g < up; g++)
+        {
+            for(int f = down; f < up; f++)
+            {
+
+                if ((x + f) < 0 || (x + f) > gm->x || (y + g) < 0 || (y + g) > gm->y)
+                {
+                    new_red += 0;
+                    new_green += 0;
+                    new_blue += 0;
+                }
+                else
+                {
+                    if (kernel_size == AVERAGE)
+                    {
+                        new_red += gm->data[((x+g) * gm->x) + (y+f)].r;
+                        new_green += gm->data[((x+g) * gm->x) + (y+f)].g;
+                        new_blue += gm->data[((x+g) * gm->x) + (y+f)].b;
+                    }
+                    else
+                    {
+                        new_red += kernel[counter] * gm->data[((x+g) * gm->x) + (y+f)].r;
+                        new_green += kernel[counter] * gm->data[((x+g) * gm->x) + (y+f)].g;
+                        new_blue += kernel[counter] * gm->data[((x+g) * gm->x) + (y+f)].b;
+                    }
+
+                }
+
+                counter++;
+   
+            }
+            
+        }
+
+        new_px->r = new_red / kernel_size;
+        new_px->g = new_green / kernel_size;
+        new_px->b = new_blue / kernel_size;
+
+
+        buffer[i] = *new_px;
 
         source++;
+        new_red = 0;
+        new_green = 0;
+        new_blue = 0;
+        counter = 0;
     }
 
-    // buffer = gm -> data;
     ret->data = buffer;
 
     return ret;
@@ -230,54 +273,108 @@ GreyMatrix * Filter(GreyMatrix * gm, int kernel_side)
 }
 
 
-
 /**
  * 
- * We know the center of the kernel
+ * Filter function
  * 
- * Convert it to coordinates using the D=Q*d+R formula
+ * Applies a square kernel, of odd side, to the greyscale image passed as @arg gm.
+ *  
+ * @arg kernel_size can assume a special value of -1 to apply an average filter to the whole image
+ * It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option
+ * was chosen given that a larger kernel would hinder the effects of the filter function.
  * 
- * Knowing the size of the side of the square of the kernel we can access every px we want
- * 
- * Accessing every pixel we want we can now calculate the average and return it
+ * However, a possible implementation that would allow variation of kernel sizes would be to
+ * pass @arg kernel_size as a negative value and use the abs() of that value as the kernel size.
+ * This way the user could pass a variable kernel to apply an average filter. We chose not to
+ * do this.
  * 
  */
-// GPx PxAverage(int idx_center, GreyMatrix * gm, int kernel_side)
-// {
+GreyMatrix * FilterGrey(GreyMatrix * gm, int kernel[], int kernel_size)
+{
 
-//     int kernel_size = kernel_side*kernel_side;
+    // Checking if our kernel has the right dimensions (perfect square and odd number as side)
+    if((kernel_size != AVERAGE) && (sqrt(kernel_size) != floor(sqrt(kernel_size)) || (int) sqrt(kernel_size) % 2 != 1))
+    {
+        printf("ERROR: Unsupported operation for the given Kernel, returning original matrix\n");
+        return gm;
+    }
+
+
+    // If we get here, we can safely cast to int
+    int kernel_side = (int) sqrt(kernel_size);
+
+    int up = kernel_side/2 + 1;
+    int down = - kernel_side/2;
+
+    // Getting up and lower bounds, with which we will apply our kernel to the image
+    if (kernel_size == AVERAGE)
+    {
+        up = 2;
+        down = -1;
+    }
+
+    
+
+    // Data fetching and storing variables
+    GPx buffer[gm->size];
+    GreyMatrix * ret = CreateGreyMat(gm->x, gm->y);
+    GPx * source = gm->data;
+    GPx *new_px = malloc(sizeof(GPx));
+
+
+    // Tracking variables, useful for positions and counting
+    int x, y;
+    int new_grey = 0;
+    int counter = 0;
+
+    for(int i = 0; i < gm->size; i++)
+    {
+
+        x = i / gm->x;
+        y = i % gm->y;
+
+
+        for(int g = down; g < up; g++)
+        {
+            for(int f = down; f < up; f++)
+            {
+
+                if ((x + f) < 0 || (x + f) > gm->x || (y + g) < 0 || (y + g) > gm->y)
+                {
+                    new_grey += 255;
+                }
+                else
+                {
+                    if (kernel_size == AVERAGE)
+                    {
+                        new_grey += gm->data[((x+g) * gm->x) + (y+f)].grey;
+                    }
+                    else
+                    {
+                        new_grey += kernel[counter] * gm->data[((x+g) * gm->x) + (y+f)].grey;
+                    }
+                }
+
+                counter++;
    
-//     int x = idx_center / gm->x;
-//     int y = idx_center % gm->y;
+            }
+            
+        }
 
-//     // (x,y) is now the center of our kernel
-//     // Now we just need to spin around it
-
-//     // Coordinates of a start pixel inside the kernel (top left)
-//     // and end pixel (bottom right)
-//     int x_start, y_start;
-//     int x_end, y_end;
-
-//     x_start = x - kernel_side/2;
-//     y_start = y - kernel_side/2;
-
-//     x_end = x + kernel_side/2;
-//     y_end = y + kernel_side/2;
-
-//     int target_idx;
-
-//     GreyMatrix * kernel = AccessGreyRegion(gm, x_start, y_start, x_end, y_end);
-
-//     // Buffer that will be used later to calculate the average of grey colors
-//     GPx * buffer = malloc(kernel_size * sizeof(GPx));
-
-//     for(int i = 0; i < kernel_size; i++)
-//     {
+        new_px->grey = new_grey / kernel_size;
 
 
-//         buffer[i] = gm->data[target_idx];
+        buffer[i] = *new_px;
 
-//     }
+        source++;
+        new_grey = 0;
+        counter = 0;
+    }
 
-// }
+    ret->data = buffer;
+
+    return ret;
+
+}
+
 
