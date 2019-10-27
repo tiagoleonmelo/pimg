@@ -1,4 +1,4 @@
-/**
+/*!
  * 
  * Test module - Driver code for testing every function developed on lena.ppm
  * 
@@ -128,13 +128,21 @@ int main(void)
 
     // Watermarking
 
+    // RGB
+    DynamicMatrix * peppers = LoadFromFile("../res/peppers.ppm");
+    DynamicMatrix * chopped_peppers = AccessRegion(peppers, 120, 120, 375, 375);
+    SaveOnFile(chopped_peppers, "../res/chopped_peppers.ppm");
+
+    DynamicMatrix * watered_peppers = WatermarkRGB(dm, chopped_peppers, 120, 120);
+    SaveOnFile(watered_peppers, "../res/watermarked_peppers.ppm");
+
+    // Greyscale
     DynamicMatrix * rgb_girl = LoadFromFile("../res/girl.ppm");
     GreyMatrix * girl = ConvertToGreyscale(rgb_girl, NONE);
     GreyMatrix * cropped_girl = AccessGreyRegion(girl, 0, 0, 255, 255);
     SaveGreyOnFile(cropped_girl, "../res/cropped_grey_girl.pgm");
 
     GreyMatrix * watermarked = WatermarkGrey(gm, cropped_girl, 120, 120);
-
     SaveGreyOnFile(watermarked, "../res/watermarked_lena.pgm");
 
 

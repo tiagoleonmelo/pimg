@@ -388,6 +388,67 @@ GreyMatrix * FilterGrey(GreyMatrix * gm, int kernel[], int kernel_size)
 
 /**
  * 
+ * Returns a watermarked version of the RGB image @arg gm 
+ * with the watermark @arg watermark
+ *  
+ * Assumes watermark is already smaller than gm (doesn't support watermark resizing)
+ * 
+ * We could have done this with ROIs but, in our opinion, this way is simpler
+ * 
+ */
+DynamicMatrix * WatermarkRGB(DynamicMatrix * gm, DynamicMatrix * watermark, int x_start, int y_start)
+{
+
+    DynamicMatrix * ret = CreateMat(gm->x, gm->y, gm->max_bright);
+
+    RGBPx * img_source = gm->data;
+    RGBPx * wm_source = watermark->data;
+    RGBPx * buffer = malloc(ret->size * sizeof(GPx));
+
+    RGBPx img_px, wm_px, result;
+
+    int counter = 0;
+
+
+    for(int i = 0; i < gm->size; i++)
+    {
+
+        // Checking if i is within the bounds of the ROI
+        if(RGBChecker(gm, x_start, y_start, x_start + watermark->x + 1, y_start + watermark->y + 1, i))
+        {
+
+            img_px = img_source[i];
+            wm_px = wm_source[counter];
+
+            result.r = img_px.r * 0.65 + wm_px.r * 0.35;
+            result.g = img_px.g * 0.65 + wm_px.g * 0.35;
+            result.b = img_px.b * 0.65 + wm_px.b * 0.35;
+
+            buffer[i] = result;
+
+            counter++;
+
+        }
+        else
+        {
+
+            buffer[i] = img_source[i];
+
+        }
+
+    }
+
+
+    ret->data = buffer;
+
+    return ret;
+
+}
+
+
+
+/**
+ * 
  * Returns a watermarked version of the Greyscale image @arg gm 
  * with the watermark @arg watermark
  *  
@@ -441,6 +502,25 @@ GreyMatrix * WatermarkGrey(GreyMatrix * gm, GreyMatrix * watermark, int x_start,
     return ret;
 
 }
+
+
+// Helper Functions
+
+/**
+ * 
+ * Returns 1 if @arg i is between the bounds set by @arg x0 @arg y0 @arg x1 @arg y1 and 0
+ * if not in the matrix @arg gm
+ * 
+ */
+int RGBChecker(DynamicMatrix * gm, int x0, int y0, int x1, int y1, int i)
+{
+    int x = i / gm->x;
+    int y = i % gm->x;
+    
+    return (x0 < x) && (x < x1) && (y0 < y) && (y < y1);
+
+}
+
 
 /**
  * 
