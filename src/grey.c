@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../lib/grey.h"
+#include "../lib/filters.h"
 
 /**
  * 
@@ -149,84 +150,39 @@ void PrintGPx(GPx * px){
  * at (   x2,   y2). Returns the sub-matrix from   dm that follows these conditions.
  * 
  */
-GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)
+GreyMatrix * AccessGreyRegion(GreyMatrix * gm, int x1, int y1, int x2, int y2)
 {
 
-    int rows = x2 - x1+1;
-    int cols = y2 - y1+1;
-    int index1 = (x1 * dm->x) + y1;
-    int index2 = (x2 * dm->x) + y2;
+    GreyMatrix * sub = CreateGreyMat(x2 - x1, y2 - y1);
 
-
-    // Lazy implementation of the abs() function
-
-    if (rows < 0)
-    {
-        rows *= -1;
-    }
-    
-    if (cols < 0)
-    {
-        cols *= -1;
-    }
-
-    GreyMatrix * sub = CreateGreyMat(rows, cols);
-    GPx buffer[sub->size];
+    GPx * img_source = gm->data;
+    GPx * buffer = malloc(sub->size * sizeof(GPx));
 
     int counter = 0;
-    int jump;
-    int help = 0;
 
-    if (index1 < index2)
+
+    for(int i = 0; i < gm->size; i++)
     {
-        jump = x1 + (dm->y - x2);
 
-        for (int i = index1; i < index2; i++)
-            {
-                // Update buffer data
-                buffer[counter] = dm->data[i];
-                counter++;
-                help++;
+        // Checking if i is within the bounds of the ROI
+        if(GreyChecker(gm, y1, x1, y2 + 1, x2 + 1, i))
+        {
 
-                if(help == sub->y)
-                {
+            buffer[counter] = img_source[i];
 
-                    i+=jump-1;
-                    help = 0;
-                }
+            counter++;
 
-            }
+        }
 
-        sub->data = buffer;
 
     }
-    else
-    {
-        jump = x2 + (dm->y - x1);
 
-        for (int i = index2; i < index1; i++)
-            {
-                // Update buffer data
-                buffer[counter] = dm->data[i];
-                counter++;
-                help++;
 
-                if(help == sub->y)
-                {
-                    i+=jump-1;
-                    help = 0;
-                }
-            }
-
-        sub->data = buffer;
-
-    }
-    
+    sub->data = buffer;
 
     return sub;
-    
-}
 
+}
 
 // Conversion Methods
 

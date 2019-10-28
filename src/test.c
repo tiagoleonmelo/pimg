@@ -24,7 +24,6 @@
  * </ul>
  * 
  * Features yet to be included in future versions:<ul>
- * <li>Selecting rectangles as Regions of Interest</li>
  * <li>Filtering rectangle images</li>
  * <li>Read from and write to .pbm files</li>
  * <li>Resizing watermarks</li>
@@ -112,13 +111,13 @@ int main(void)
     printf("\n");
 
     // Accessing a RGB Matrix ROI and saving it (cropping an image)
-    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 400, 400);
+    DynamicMatrix * sub = AccessRegion(dm, 0, 0, 420, 200);
     // PrintMat(sub);
     SaveOnFile(sub, "../res/cropped_lena.ppm");
 
 
     // Accessing a Grey Matrix ROI and saving it (cropping an image)
-    GreyMatrix * grey_sub = AccessGreyRegion(gm, 0, 0, 400, 400);
+    GreyMatrix * grey_sub = AccessGreyRegion(gm, 80, 100, 320, 400);
     // PrintMat(sub);
     SaveGreyOnFile(grey_sub, "../res/cropped_grey_lena.pgm");
 
