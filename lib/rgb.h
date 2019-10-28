@@ -1,5 +1,6 @@
 /**
  * 
+ * \file rgb.h
  * Header which contains the required structures and function declarations for the RGB Module.
  * 
  */
@@ -19,8 +20,6 @@
 typedef struct{
     unsigned char r,g,b;
 } RGBPx;
-
-
 
 
 /**

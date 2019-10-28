@@ -1,14 +1,12 @@
 /**
  * 
+ * \file grey.h
  * Header which contains the required structures and function declarations for the Greyscale Module.
  * 
  */
 
-//TODO: IMPLEMENTAR ACCESSGREYREGION
-
 #ifndef INC_00_GREY_H
 #define INC_00_GREY_H
-//#include "rgb.h"
 
 /**
  * 

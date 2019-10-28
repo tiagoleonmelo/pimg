@@ -1,5 +1,6 @@
 /**
  * 
+ * \file filters.c
  * <h2>Filters module</h2>
  * 
  * Contains the implementation of the available functions to manipulate image data, namely:<ul>
@@ -36,7 +37,7 @@
  * 
  * Manipulating brightness levels for RGB Images
  * 
- * @arg value is added to each of the @arg dm pixels.
+ *   value is added to each of the   dm pixels.
  * 
  * In this case, each channel of an RGB pixel is the result of this sum
  * 
@@ -118,7 +119,7 @@ DynamicMatrix * Saturate(DynamicMatrix * dm, int value)
  * 
  * Manipulating brightness levels for Greyscale Images
  * 
- * @arg value is added to each of the @arg dm pixels.
+ *   value is added to each of the   dm pixels.
  * 
  * In this case, each Greyscale pixel of the resulting matrix is the result of the sum between
  * the dm's pixel and value.
@@ -174,14 +175,14 @@ GreyMatrix * SaturateGrey(GreyMatrix * dm, int value)
  * 
  * Filter function
  * 
- * Applies a square kernel, of odd side, to the RGB image passed as @arg gm.
+ * Applies a square kernel, of odd side, to the RGB image passed as   gm.
  *  
- * @arg kernel_size can assume a special value of -1 to apply an average filter to the whole image
+ *   kernel_size can assume a special value of -1 to apply an average filter to the whole image
  * It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option
  * was chosen given that a larger kernel would hinder the effects of the filter function.
  * 
  * However, a possible implementation that would allow variation of kernel sizes would be to
- * pass @arg kernel_size as a negative value and use the abs() of that value as the kernel size.
+ * pass   kernel_size as a negative value and use the abs() of that value as the kernel size.
  * This way the user could pass a variable kernel to apply an average filter. We chose not to
  * do this.
  * 
@@ -288,14 +289,14 @@ DynamicMatrix * FilterRGB(DynamicMatrix * gm, int kernel[], int kernel_size)
  * 
  * Filter function
  * 
- * Applies a square kernel, of odd side, to the greyscale image passed as @arg gm.
+ * Applies a square kernel, of odd side, to the greyscale image passed as   gm.
  *  
- * @arg kernel_size can assume a special value of -1 to apply an average filter to the whole image
+ *   kernel_size can assume a special value of -1 to apply an average filter to the whole image
  * It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option
  * was chosen given that a larger kernel would hinder the effects of the filter function.
  * 
  * However, a possible implementation that would allow variation of kernel sizes would be to
- * pass @arg kernel_size as a negative value and use the abs() of that value as the kernel size.
+ * pass   kernel_size as a negative value and use the abs() of that value as the kernel size.
  * This way the user could pass a variable kernel to apply an average filter. We chose not to
  * do this.
  * 
@@ -392,8 +393,8 @@ GreyMatrix * FilterGrey(GreyMatrix * gm, int kernel[], int kernel_size)
 
 /**
  * 
- * Returns a watermarked version of the RGB image @arg gm 
- * with the watermark @arg watermark
+ * Returns a watermarked version of the RGB image   gm 
+ * with the watermark   watermark
  *  
  * Assumes watermark is already smaller than gm (doesn't support watermark resizing)
  * 
@@ -453,8 +454,8 @@ DynamicMatrix * WatermarkRGB(DynamicMatrix * gm, DynamicMatrix * watermark, int 
 
 /**
  * 
- * Returns a watermarked version of the Greyscale image @arg gm 
- * with the watermark @arg watermark
+ * Returns a watermarked version of the Greyscale image   gm 
+ * with the watermark   watermark
  *  
  * Assumes watermark is already smaller than gm (doesn't support watermark resizing)
  * 
@@ -512,8 +513,8 @@ GreyMatrix * WatermarkGrey(GreyMatrix * gm, GreyMatrix * watermark, int x_start,
 
 /**
  * 
- * Returns 1 if @arg i is between the bounds set by @arg x0 @arg y0 @arg x1 @arg y1 and 0
- * if not in the matrix @arg gm
+ * Returns 1 if   i is between the bounds set by   x0   y0   x1   y1 and 0
+ * if not in the matrix   gm
  * 
  */
 int RGBChecker(DynamicMatrix * gm, int x0, int y0, int x1, int y1, int i)
@@ -528,8 +529,8 @@ int RGBChecker(DynamicMatrix * gm, int x0, int y0, int x1, int y1, int i)
 
 /**
  * 
- * Returns 1 if @arg i is between the bounds set by @arg x0 @arg y0 @arg x1 @arg y1 and 0
- * if not in the matrix @arg gm
+ * Returns 1 if   i is between the bounds set by   x0   y0   x1   y1 and 0
+ * if not in the matrix   gm
  * 
  */
 int GreyChecker(GreyMatrix * gm, int x0, int y0, int x1, int y1, int i)

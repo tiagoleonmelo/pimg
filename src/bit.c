@@ -1,6 +1,7 @@
 /**
  * 
- * \file <h2>Bit Image Manipulation</h2>
+ * \file bit.c
+ * <h2>Bit Image Manipulation</h2>
  * <br>
  * The Bit module contains methods for reading and writing bitmap images.
  * <br>
@@ -142,7 +143,7 @@ void SaveBitMatOnFile(unsigned int *mat, char *name, int size)
 
 /**
  * 
- * Prints a BitMap matrix @arg bmp of size @arg size
+ * Prints a BitMap matrix   bmp of size   size
  * 
  */
 void PrintBitMat(unsigned int * bmp, int size)

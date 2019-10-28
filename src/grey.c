@@ -1,6 +1,7 @@
 /**
  * 
- * \file <h2>GreyScale Image Manipulation</h2>
+ * \file grey.c
+ * <h2>GreyScale Image Manipulation</h2>
  * <br>
  * The GreyScale module contains methods for:<ul>
  * <li>reading</li>
@@ -123,7 +124,7 @@ void PrintGreyMat(GreyMatrix * dm){
 
 /**
  * 
- * Access the position at [ @arg row][ @arg col] in the matrix @arg dm
+ * Access the position at [   row][   col] in the matrix   dm
  * 
  */
 GPx * AccessGPx(GreyMatrix * dm, int row, int col){
@@ -134,7 +135,7 @@ GPx * AccessGPx(GreyMatrix * dm, int row, int col){
 
 /**
  * 
- * Print a Greyscale Pixel @arg px, which is just the grey component of it
+ * Print a Greyscale Pixel   px, which is just the grey component of it
  * 
  */
 void PrintGPx(GPx * px){
@@ -144,8 +145,8 @@ void PrintGPx(GPx * px){
 
 /**
  * 
- * Access a given ROI. Top left pixel is at ( @arg x1, @arg y1) and bottom right pixel is
- * at ( @arg x2, @arg y2). Returns the sub-matrix from @arg dm that follows these conditions.
+ * Access a given ROI. Top left pixel is at (   x1,   y1) and bottom right pixel is
+ * at (   x2,   y2). Returns the sub-matrix from   dm that follows these conditions.
  * 
  */
 GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)

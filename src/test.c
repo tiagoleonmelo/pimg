@@ -4,8 +4,8 @@
  * the PNM format, i. e., RGB images in .ppm, Greyscale images in .pgm and managing BitMap
  * images. <br>
  * 
- * Core functionalities of the app include: structures that support the interal storage RGB,
- * Greyscale and Binary Matrixes thanks to the structures RGBPx and GPx. Each of the matrixes
+ * Core functionalities of the app include: structures that support the internal storage RGB,
+ * Greyscale and Binary Matrixes with the use of the structures RGBPx and GPx. Each of the matrixes
  * has file compatibility, i. e., can be saved to and loaded from files, supports individual
  * pixel access and ROI access. It is worth mentioning that the ROI functionality is only
  * supported for cropping squares from images.
@@ -41,6 +41,7 @@
 
 /*!
  * 
+ * \file test.c
  * <h2>Test module</h2>
  * Driver code for testing every function developed on lena.ppm
  * 

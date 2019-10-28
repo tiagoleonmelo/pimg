@@ -1,7 +1,7 @@
 /**
  * 
+ * \file filters.h
  * Header that contains the appliable filters to an image
- * 
  * 
  */
 

@@ -1,10 +1,9 @@
 /**
  * 
+ * \file bit.h
  * Header which contains the required structures and function declarations for the Bit Module.
  *
  */
-
-//TODO: declaracao/implementaçao de funcoes (accessbitregion)
 
 #ifndef INC_00_BIT_H
 #define INC_00_BIT_H

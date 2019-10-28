@@ -25,7 +25,7 @@
    <div id="projectname">pimg
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">C based Image Processing Software</div>
+   <div id="projectbrief">C Based Image Processing Software</div>
   </td>
  </tr>
  </tbody>
@@ -73,71 +73,68 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="grey_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//TODO: IMPLEMENTAR ACCESSGREYREGION</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef INC_00_GREY_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define INC_00_GREY_H</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//#include &quot;rgb.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="struct_g_px.html">   19</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="struct_g_px.html#ad420a5c9f2d8b08dfcb2754f83ab04dc">   20</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="struct_g_px.html#ad420a5c9f2d8b08dfcb2754f83ab04dc">grey</a>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;} <a class="code" href="struct_g_px.html">GPx</a>;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef INC_00_GREY_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define INC_00_GREY_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="struct_g_px.html">   17</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="struct_g_px.html#ad420a5c9f2d8b08dfcb2754f83ab04dc">   18</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="struct_g_px.html#ad420a5c9f2d8b08dfcb2754f83ab04dc">grey</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <a class="code" href="struct_g_px.html">GPx</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html">   31</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#ad3a25870ccbc7a1cbc5cb4ea66653947">   32</a></span>&#160;    <a class="code" href="struct_g_px.html">GPx</a> *<a class="code" href="struct_grey_matrix.html#ad3a25870ccbc7a1cbc5cb4ea66653947">data</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#a76f11d9a0a47b94f72c2d0e77fb32240">   33</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_grey_matrix.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#a0a2f84ed7838f07779ae24c5a9086d33">   34</a></span>&#160;    <span class="keywordtype">int</span> x, <a class="code" href="struct_grey_matrix.html#a0a2f84ed7838f07779ae24c5a9086d33">y</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#a439227feff9d7f55384e8780cfc2eb82">   35</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_grey_matrix.html#a439227feff9d7f55384e8780cfc2eb82">size</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <a class="code" href="struct_grey_matrix.html">GreyMatrix</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html">   29</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#ad3a25870ccbc7a1cbc5cb4ea66653947">   30</a></span>&#160;    <a class="code" href="struct_g_px.html">GPx</a> *<a class="code" href="struct_grey_matrix.html#ad3a25870ccbc7a1cbc5cb4ea66653947">data</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#a76f11d9a0a47b94f72c2d0e77fb32240">   31</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_grey_matrix.html#a76f11d9a0a47b94f72c2d0e77fb32240">n</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#a0a2f84ed7838f07779ae24c5a9086d33">   32</a></span>&#160;    <span class="keywordtype">int</span> x, <a class="code" href="struct_grey_matrix.html#a0a2f84ed7838f07779ae24c5a9086d33">y</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="struct_grey_matrix.html#a439227feff9d7f55384e8780cfc2eb82">   33</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_grey_matrix.html#a439227feff9d7f55384e8780cfc2eb82">size</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <a class="code" href="struct_grey_matrix.html">GreyMatrix</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// Greyscale Functions</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Greyscale Functions</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//read/write</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#ac296e3a789cdc9875b6a42f85b137d74">CreateGreyMat</a>(<span class="keywordtype">int</span> rows, <span class="keywordtype">int</span> cols);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">//read/write</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#ac296e3a789cdc9875b6a42f85b137d74">CreateGreyMat</a>(<span class="keywordtype">int</span> rows, <span class="keywordtype">int</span> cols);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#a72e6bb8949cad9017c8e820d7fba31c5">LoadGreyFromFile</a>(<span class="keywordtype">char</span> *);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#a72e6bb8949cad9017c8e820d7fba31c5">LoadGreyFromFile</a>(<span class="keywordtype">char</span> *);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="grey_8h.html#a7a68a9601806a41ea07b25a98a9b3c8d">SaveGreyOnFile</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> *v, <span class="keywordtype">char</span> *name);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="grey_8h.html#a7a68a9601806a41ea07b25a98a9b3c8d">SaveGreyOnFile</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> *v, <span class="keywordtype">char</span> *name);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="grey_8h.html#aed456c903c54510b2cebd19910b7aa52">PrintGreyMat</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * dm);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="grey_8h.html#aed456c903c54510b2cebd19910b7aa52">PrintGreyMat</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * dm);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">//pixel/area</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<a class="code" href="struct_g_px.html">GPx</a> * <a class="code" href="grey_8h.html#a9269b0799f786fc6944b273c42580df8">AccessGPx</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * dm, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//pixel/area</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="struct_g_px.html">GPx</a> * <a class="code" href="grey_8h.html#a9269b0799f786fc6944b273c42580df8">AccessGPx</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * dm, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> col);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">void</span> <a class="code" href="grey_8h.html#abde70e721b8da03d9cd4f13a00e7013d">PrintGPx</a>(<a class="code" href="struct_g_px.html">GPx</a> * px);</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">void</span> <a class="code" href="grey_8h.html#abde70e721b8da03d9cd4f13a00e7013d">PrintGPx</a>(<a class="code" href="struct_g_px.html">GPx</a> * px);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#a8886d469907489de7dff50cd7ac55489">AccessGreyRegion</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> *dm, <span class="keywordtype">int</span> x1, <span class="keywordtype">int</span> y1, <span class="keywordtype">int</span> x2, <span class="keywordtype">int</span> y2);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#a8886d469907489de7dff50cd7ac55489">AccessGreyRegion</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> *dm, <span class="keywordtype">int</span> x1, <span class="keywordtype">int</span> y1, <span class="keywordtype">int</span> x2, <span class="keywordtype">int</span> y2);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">//convert</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> * <a class="code" href="grey_8h.html#ac72fde79723c76a99fe0db63359fd19d">ConvertToBitMat</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * gm);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">//convert</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> * <a class="code" href="grey_8h.html#ac72fde79723c76a99fe0db63359fd19d">ConvertToBitMat</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * gm);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#a599b3e89aa3a4dc28d0b572dd4d0ad75">ConvertToBitGreyMat</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * gm, <span class="keywordtype">int</span> threshold);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * <a class="code" href="grey_8h.html#a599b3e89aa3a4dc28d0b572dd4d0ad75">ConvertToBitGreyMat</a>(<a class="code" href="struct_grey_matrix.html">GreyMatrix</a> * gm, <span class="keywordtype">int</span> threshold);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grey_8h.html#a179d24dfb99a637177ccd44f8a7b0a4c">ConvertToBit</a>(<span class="keywordtype">int</span> pixels[]);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="grey_8h.html#a179d24dfb99a637177ccd44f8a7b0a4c">ConvertToBit</a>(<span class="keywordtype">int</span> pixels[]);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif //INC_00_GREY_H</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif //INC_00_GREY_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="agrey_8h_html_a9269b0799f786fc6944b273c42580df8"><div class="ttname"><a href="grey_8h.html#a9269b0799f786fc6944b273c42580df8">AccessGPx</a></div><div class="ttdeci">GPx * AccessGPx(GreyMatrix *dm, int row, int col)</div><div class="ttdef"><b>Definition:</b> grey.c:129</div></div>
-<div class="ttc" id="astruct_g_px_html"><div class="ttname"><a href="struct_g_px.html">GPx</a></div><div class="ttdef"><b>Definition:</b> grey.h:19</div></div>
-<div class="ttc" id="astruct_grey_matrix_html"><div class="ttname"><a href="struct_grey_matrix.html">GreyMatrix</a></div><div class="ttdef"><b>Definition:</b> grey.h:31</div></div>
-<div class="ttc" id="astruct_grey_matrix_html_a439227feff9d7f55384e8780cfc2eb82"><div class="ttname"><a href="struct_grey_matrix.html#a439227feff9d7f55384e8780cfc2eb82">GreyMatrix::size</a></div><div class="ttdeci">int size</div><div class="ttdef"><b>Definition:</b> grey.h:35</div></div>
-<div class="ttc" id="agrey_8h_html_a7a68a9601806a41ea07b25a98a9b3c8d"><div class="ttname"><a href="grey_8h.html#a7a68a9601806a41ea07b25a98a9b3c8d">SaveGreyOnFile</a></div><div class="ttdeci">void SaveGreyOnFile(GreyMatrix *v, char *name)</div><div class="ttdef"><b>Definition:</b> grey.c:91</div></div>
-<div class="ttc" id="agrey_8h_html_abde70e721b8da03d9cd4f13a00e7013d"><div class="ttname"><a href="grey_8h.html#abde70e721b8da03d9cd4f13a00e7013d">PrintGPx</a></div><div class="ttdeci">void PrintGPx(GPx *px)</div><div class="ttdef"><b>Definition:</b> grey.c:140</div></div>
-<div class="ttc" id="agrey_8h_html_a179d24dfb99a637177ccd44f8a7b0a4c"><div class="ttname"><a href="grey_8h.html#a179d24dfb99a637177ccd44f8a7b0a4c">ConvertToBit</a></div><div class="ttdeci">unsigned int ConvertToBit(int pixels[])</div><div class="ttdef"><b>Definition:</b> grey.c:344</div></div>
-<div class="ttc" id="astruct_g_px_html_ad420a5c9f2d8b08dfcb2754f83ab04dc"><div class="ttname"><a href="struct_g_px.html#ad420a5c9f2d8b08dfcb2754f83ab04dc">GPx::grey</a></div><div class="ttdeci">unsigned char grey</div><div class="ttdef"><b>Definition:</b> grey.h:20</div></div>
-<div class="ttc" id="astruct_grey_matrix_html_ad3a25870ccbc7a1cbc5cb4ea66653947"><div class="ttname"><a href="struct_grey_matrix.html#ad3a25870ccbc7a1cbc5cb4ea66653947">GreyMatrix::data</a></div><div class="ttdeci">GPx * data</div><div class="ttdef"><b>Definition:</b> grey.h:32</div></div>
-<div class="ttc" id="agrey_8h_html_ac296e3a789cdc9875b6a42f85b137d74"><div class="ttname"><a href="grey_8h.html#ac296e3a789cdc9875b6a42f85b137d74">CreateGreyMat</a></div><div class="ttdeci">GreyMatrix * CreateGreyMat(int rows, int cols)</div><div class="ttdef"><b>Definition:</b> grey.c:32</div></div>
-<div class="ttc" id="astruct_grey_matrix_html_a76f11d9a0a47b94f72c2d0e77fb32240"><div class="ttname"><a href="struct_grey_matrix.html#a76f11d9a0a47b94f72c2d0e77fb32240">GreyMatrix::n</a></div><div class="ttdeci">int n</div><div class="ttdef"><b>Definition:</b> grey.h:33</div></div>
-<div class="ttc" id="astruct_grey_matrix_html_a0a2f84ed7838f07779ae24c5a9086d33"><div class="ttname"><a href="struct_grey_matrix.html#a0a2f84ed7838f07779ae24c5a9086d33">GreyMatrix::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition:</b> grey.h:34</div></div>
-<div class="ttc" id="agrey_8h_html_a8886d469907489de7dff50cd7ac55489"><div class="ttname"><a href="grey_8h.html#a8886d469907489de7dff50cd7ac55489">AccessGreyRegion</a></div><div class="ttdeci">GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)</div><div class="ttdef"><b>Definition:</b> grey.c:151</div></div>
-<div class="ttc" id="agrey_8h_html_aed456c903c54510b2cebd19910b7aa52"><div class="ttname"><a href="grey_8h.html#aed456c903c54510b2cebd19910b7aa52">PrintGreyMat</a></div><div class="ttdeci">void PrintGreyMat(GreyMatrix *dm)</div><div class="ttdef"><b>Definition:</b> grey.c:112</div></div>
-<div class="ttc" id="agrey_8h_html_a72e6bb8949cad9017c8e820d7fba31c5"><div class="ttname"><a href="grey_8h.html#a72e6bb8949cad9017c8e820d7fba31c5">LoadGreyFromFile</a></div><div class="ttdeci">GreyMatrix * LoadGreyFromFile(char *)</div><div class="ttdef"><b>Definition:</b> grey.c:56</div></div>
-<div class="ttc" id="agrey_8h_html_ac72fde79723c76a99fe0db63359fd19d"><div class="ttname"><a href="grey_8h.html#ac72fde79723c76a99fe0db63359fd19d">ConvertToBitMat</a></div><div class="ttdeci">unsigned int * ConvertToBitMat(GreyMatrix *gm)</div><div class="ttdef"><b>Definition:</b> grey.c:290</div></div>
-<div class="ttc" id="agrey_8h_html_a599b3e89aa3a4dc28d0b572dd4d0ad75"><div class="ttname"><a href="grey_8h.html#a599b3e89aa3a4dc28d0b572dd4d0ad75">ConvertToBitGreyMat</a></div><div class="ttdeci">GreyMatrix * ConvertToBitGreyMat(GreyMatrix *gm, int threshold)</div><div class="ttdef"><b>Definition:</b> grey.c:239</div></div>
+<div class="ttc" id="agrey_8h_html_a9269b0799f786fc6944b273c42580df8"><div class="ttname"><a href="grey_8h.html#a9269b0799f786fc6944b273c42580df8">AccessGPx</a></div><div class="ttdeci">GPx * AccessGPx(GreyMatrix *dm, int row, int col)</div><div class="ttdef"><b>Definition:</b> grey.c:130</div></div>
+<div class="ttc" id="astruct_g_px_html"><div class="ttname"><a href="struct_g_px.html">GPx</a></div><div class="ttdef"><b>Definition:</b> grey.h:17</div></div>
+<div class="ttc" id="astruct_grey_matrix_html"><div class="ttname"><a href="struct_grey_matrix.html">GreyMatrix</a></div><div class="ttdef"><b>Definition:</b> grey.h:29</div></div>
+<div class="ttc" id="astruct_grey_matrix_html_a439227feff9d7f55384e8780cfc2eb82"><div class="ttname"><a href="struct_grey_matrix.html#a439227feff9d7f55384e8780cfc2eb82">GreyMatrix::size</a></div><div class="ttdeci">int size</div><div class="ttdef"><b>Definition:</b> grey.h:33</div></div>
+<div class="ttc" id="agrey_8h_html_a7a68a9601806a41ea07b25a98a9b3c8d"><div class="ttname"><a href="grey_8h.html#a7a68a9601806a41ea07b25a98a9b3c8d">SaveGreyOnFile</a></div><div class="ttdeci">void SaveGreyOnFile(GreyMatrix *v, char *name)</div><div class="ttdef"><b>Definition:</b> grey.c:92</div></div>
+<div class="ttc" id="agrey_8h_html_abde70e721b8da03d9cd4f13a00e7013d"><div class="ttname"><a href="grey_8h.html#abde70e721b8da03d9cd4f13a00e7013d">PrintGPx</a></div><div class="ttdeci">void PrintGPx(GPx *px)</div><div class="ttdef"><b>Definition:</b> grey.c:141</div></div>
+<div class="ttc" id="agrey_8h_html_a179d24dfb99a637177ccd44f8a7b0a4c"><div class="ttname"><a href="grey_8h.html#a179d24dfb99a637177ccd44f8a7b0a4c">ConvertToBit</a></div><div class="ttdeci">unsigned int ConvertToBit(int pixels[])</div><div class="ttdef"><b>Definition:</b> grey.c:345</div></div>
+<div class="ttc" id="astruct_g_px_html_ad420a5c9f2d8b08dfcb2754f83ab04dc"><div class="ttname"><a href="struct_g_px.html#ad420a5c9f2d8b08dfcb2754f83ab04dc">GPx::grey</a></div><div class="ttdeci">unsigned char grey</div><div class="ttdef"><b>Definition:</b> grey.h:18</div></div>
+<div class="ttc" id="astruct_grey_matrix_html_ad3a25870ccbc7a1cbc5cb4ea66653947"><div class="ttname"><a href="struct_grey_matrix.html#ad3a25870ccbc7a1cbc5cb4ea66653947">GreyMatrix::data</a></div><div class="ttdeci">GPx * data</div><div class="ttdef"><b>Definition:</b> grey.h:30</div></div>
+<div class="ttc" id="agrey_8h_html_ac296e3a789cdc9875b6a42f85b137d74"><div class="ttname"><a href="grey_8h.html#ac296e3a789cdc9875b6a42f85b137d74">CreateGreyMat</a></div><div class="ttdeci">GreyMatrix * CreateGreyMat(int rows, int cols)</div><div class="ttdef"><b>Definition:</b> grey.c:33</div></div>
+<div class="ttc" id="astruct_grey_matrix_html_a76f11d9a0a47b94f72c2d0e77fb32240"><div class="ttname"><a href="struct_grey_matrix.html#a76f11d9a0a47b94f72c2d0e77fb32240">GreyMatrix::n</a></div><div class="ttdeci">int n</div><div class="ttdef"><b>Definition:</b> grey.h:31</div></div>
+<div class="ttc" id="astruct_grey_matrix_html_a0a2f84ed7838f07779ae24c5a9086d33"><div class="ttname"><a href="struct_grey_matrix.html#a0a2f84ed7838f07779ae24c5a9086d33">GreyMatrix::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition:</b> grey.h:32</div></div>
+<div class="ttc" id="agrey_8h_html_a8886d469907489de7dff50cd7ac55489"><div class="ttname"><a href="grey_8h.html#a8886d469907489de7dff50cd7ac55489">AccessGreyRegion</a></div><div class="ttdeci">GreyMatrix * AccessGreyRegion(GreyMatrix *dm, int x1, int y1, int x2, int y2)</div><div class="ttdef"><b>Definition:</b> grey.c:152</div></div>
+<div class="ttc" id="agrey_8h_html_aed456c903c54510b2cebd19910b7aa52"><div class="ttname"><a href="grey_8h.html#aed456c903c54510b2cebd19910b7aa52">PrintGreyMat</a></div><div class="ttdeci">void PrintGreyMat(GreyMatrix *dm)</div><div class="ttdef"><b>Definition:</b> grey.c:113</div></div>
+<div class="ttc" id="agrey_8h_html_a72e6bb8949cad9017c8e820d7fba31c5"><div class="ttname"><a href="grey_8h.html#a72e6bb8949cad9017c8e820d7fba31c5">LoadGreyFromFile</a></div><div class="ttdeci">GreyMatrix * LoadGreyFromFile(char *)</div><div class="ttdef"><b>Definition:</b> grey.c:57</div></div>
+<div class="ttc" id="agrey_8h_html_ac72fde79723c76a99fe0db63359fd19d"><div class="ttname"><a href="grey_8h.html#ac72fde79723c76a99fe0db63359fd19d">ConvertToBitMat</a></div><div class="ttdeci">unsigned int * ConvertToBitMat(GreyMatrix *gm)</div><div class="ttdef"><b>Definition:</b> grey.c:291</div></div>
+<div class="ttc" id="agrey_8h_html_a599b3e89aa3a4dc28d0b572dd4d0ad75"><div class="ttname"><a href="grey_8h.html#a599b3e89aa3a4dc28d0b572dd4d0ad75">ConvertToBitGreyMat</a></div><div class="ttdeci">GreyMatrix * ConvertToBitGreyMat(GreyMatrix *gm, int threshold)</div><div class="ttdef"><b>Definition:</b> grey.c:240</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

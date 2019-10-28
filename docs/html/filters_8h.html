@@ -25,7 +25,7 @@
    <div id="projectname">pimg
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">C based Image Processing Software</div>
+   <div id="projectbrief">C Based Image Processing Software</div>
   </td>
  </tr>
  </tbody>
@@ -99,7 +99,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac2fc5dbac1655ec2b0520f8a8ec918c6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="filters_8h.html#ac2fc5dbac1655ec2b0520f8a8ec918c6">GreyChecker</a> (<a class="el" href="struct_grey_matrix.html">GreyMatrix</a> *gm, int x0, int y0, int x1, int y1, int i)</td></tr>
 <tr class="separator:ac2fc5dbac1655ec2b0520f8a8ec918c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header that contains the appliable filters to an image </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a15c9fa1b8c2170221a7f0d7919bac325"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15c9fa1b8c2170221a7f0d7919bac325">&#9670;&nbsp;</a></span>FilterGrey()</h2>
 
@@ -132,15 +134,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Filter function</p>
-<p>Applies a square kernel, of odd side, to the greyscale image passed as </p><ul>
-<li>gm.</li>
-</ul>
-<ul>
-<li>kernel_size can assume a special value of -1 to apply an average filter to the whole image It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option was chosen given that a larger kernel would hinder the effects of the filter function.</li>
-</ul>
-<p>However, a possible implementation that would allow variation of kernel sizes would be to pass </p><ul>
-<li>kernel_size as a negative value and use the abs() of that value as the kernel size. This way the user could pass a variable kernel to apply an average filter. We chose not to do this. </li>
-</ul>
+<p>Applies a square kernel, of odd side, to the greyscale image passed as gm.</p>
+<p>kernel_size can assume a special value of -1 to apply an average filter to the whole image It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option was chosen given that a larger kernel would hinder the effects of the filter function.</p>
+<p>However, a possible implementation that would allow variation of kernel sizes would be to pass kernel_size as a negative value and use the abs() of that value as the kernel size. This way the user could pass a variable kernel to apply an average filter. We chose not to do this. </p>
 
 </div>
 </div>
@@ -176,15 +172,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Filter function</p>
-<p>Applies a square kernel, of odd side, to the RGB image passed as </p><ul>
-<li>gm.</li>
-</ul>
-<ul>
-<li>kernel_size can assume a special value of -1 to apply an average filter to the whole image It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option was chosen given that a larger kernel would hinder the effects of the filter function.</li>
-</ul>
-<p>However, a possible implementation that would allow variation of kernel sizes would be to pass </p><ul>
-<li>kernel_size as a negative value and use the abs() of that value as the kernel size. This way the user could pass a variable kernel to apply an average filter. We chose not to do this. </li>
-</ul>
+<p>Applies a square kernel, of odd side, to the RGB image passed as gm.</p>
+<p>kernel_size can assume a special value of -1 to apply an average filter to the whole image It is worth mentioning that, in this case, the kernel simply assumes a 3x3 box. This option was chosen given that a larger kernel would hinder the effects of the filter function.</p>
+<p>However, a possible implementation that would allow variation of kernel sizes would be to pass kernel_size as a negative value and use the abs() of that value as the kernel size. This way the user could pass a variable kernel to apply an average filter. We chose not to do this. </p>
 
 </div>
 </div>
@@ -237,14 +227,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns 1 if </p><ul>
-<li>i is between the bounds set by </li>
-<li>x0 </li>
-<li>y0 </li>
-<li>x1 </li>
-<li>y1 and 0 if not in the matrix </li>
-<li>gm </li>
-</ul>
+<p>Returns 1 if i is between the bounds set by x0 y0 x1 y1 and 0 if not in the matrix gm </p>
 
 </div>
 </div>
@@ -297,14 +280,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns 1 if </p><ul>
-<li>i is between the bounds set by </li>
-<li>x0 </li>
-<li>y0 </li>
-<li>x1 </li>
-<li>y1 and 0 if not in the matrix </li>
-<li>gm </li>
-</ul>
+<p>Returns 1 if i is between the bounds set by x0 y0 x1 y1 and 0 if not in the matrix gm </p>
 
 </div>
 </div>
@@ -333,12 +309,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Header that contains the appliable filters to an image</p>
 <p>Manipulating brightness levels for RGB Images</p>
-<ul>
-<li>value is added to each of the </li>
-<li>dm pixels.</li>
-</ul>
+<p>value is added to each of the dm pixels.</p>
 <p>In this case, each channel of an RGB pixel is the result of this sum </p>
 
 </div>
@@ -369,10 +341,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Manipulating brightness levels for Greyscale Images</p>
-<ul>
-<li>value is added to each of the </li>
-<li>dm pixels.</li>
-</ul>
+<p>value is added to each of the dm pixels.</p>
 <p>In this case, each Greyscale pixel of the resulting matrix is the result of the sum between the dm's pixel and value. </p>
 
 </div>
@@ -414,10 +383,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns a watermarked version of the Greyscale image </p><ul>
-<li>gm with the watermark </li>
-<li>watermark</li>
-</ul>
+<p>Returns a watermarked version of the Greyscale image gm with the watermark watermark</p>
 <p>Assumes watermark is already smaller than gm (doesn't support watermark resizing)</p>
 <p>We could have done this with ROIs but, in our opinion, this way is simpler </p>
 
@@ -460,10 +426,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns a watermarked version of the RGB image </p><ul>
-<li>gm with the watermark </li>
-<li>watermark</li>
-</ul>
+<p>Returns a watermarked version of the RGB image gm with the watermark watermark</p>
 <p>Assumes watermark is already smaller than gm (doesn't support watermark resizing)</p>
 <p>We could have done this with ROIs but, in our opinion, this way is simpler </p>
 

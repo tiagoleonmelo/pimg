@@ -25,7 +25,7 @@
    <div id="projectname">pimg
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">C based Image Processing Software</div>
+   <div id="projectbrief">C Based Image Processing Software</div>
   </td>
  </tr>
  </tbody>
@@ -107,7 +107,9 @@ Functions</h2></td></tr>
 <tr class="memitem:adccc6ada076205c6b5a28dd7770f69b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_g_px.html">GPx</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rgb_8h.html#adccc6ada076205c6b5a28dd7770f69b2">ConvertPX</a> (<a class="el" href="struct_r_g_b_px.html">RGBPx</a> *px, int channel)</td></tr>
 <tr class="separator:adccc6ada076205c6b5a28dd7770f69b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header which contains the required structures and function declarations for the RGB Module. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="adbd00e00b0f4a97b40f5dc129626bc79"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adbd00e00b0f4a97b40f5dc129626bc79">&#9670;&nbsp;</a></span>AccessRegion()</h2>
 
@@ -151,13 +153,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Access a given ROI. Top left pixel is at ( </p><ul>
-<li>x1, </li>
-<li>y1) and bottom right pixel is at ( </li>
-<li>x2, </li>
-<li>y2). Returns the sub-matrix from </li>
-<li>dm that follows these conditions.</li>
-</ul>
+<p>Access a given ROI. Top left pixel is at ( x1, y1) and bottom right pixel is at (x2, y2). Returns the sub-matrix from dm that follows these conditions.</p>
 <p>The current version only supports cropping squares, for reasons unknown to mankind. </p>
 
 </div>
@@ -193,11 +189,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Access the position at [ </p><ul>
-<li>row][ </li>
-<li>col] in the matrix </li>
-<li>dm </li>
-</ul>
+<p>Access the position at [row][col] in the matrix dm </p>
 
 </div>
 </div>
@@ -227,10 +219,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Convert an RGB pixel into a Greyscale pixel, by means of color component averaging</p>
-<ul>
-<li>channel follows the same logic as above, i. e., when NONE is specified, </li>
-<li>px will be converted using a formula that takes into consideration every color component. Otherwise, it considers only the color component given. </li>
-</ul>
+<p>channel follows the same logic as above, i. e., when NONE is specified, px will be converted using a formula that takes into consideration every color component. Otherwise, it considers only the color component given. </p>
 
 </div>
 </div>
@@ -259,13 +248,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Function that converts an RGB Matrix </p><ul>
-<li>dm to a Greyscale matrix and returns it.</li>
-</ul>
+<p>Function that converts an RGB Matrix dm to a Greyscale matrix and returns it.</p>
 <p>Essentially, it iterates through the RGB data, converts it and stores it in a buffer. This buffer is then used as the new Greyscale Matrix's data.</p>
-<ul>
-<li>channel is an argument that allows the user to select a channel of color into which the RGB Matrix will be split. If NONE is specified, the Greyscale image generated will be an overlap of the Red, Green and Blue Greyscale images. </li>
-</ul>
+<p>channel is an argument that allows the user to select a channel of color into which the RGB Matrix will be split. If NONE is specified, the Greyscale image generated will be an overlap of the Red, Green and Blue Greyscale images. </p>
 
 </div>
 </div>
@@ -301,13 +286,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Create a RGB Matrix, composed of RGBPixels</p>
-<p>The matrix to return has </p><ul>
-<li>rows rows and </li>
-<li>cols columns.</li>
-</ul>
-<p>Its maximum RGB value is given by </p><ul>
-<li>max_bright </li>
-</ul>
+<p>The matrix to return has rows and cols columns.</p>
+<p>Its maximum RGB value is given by max_bright </p>
 
 </div>
 </div>
@@ -326,9 +306,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Load a RGB Matrix from file called </p><ul>
-<li>name </li>
-</ul>
+<p>Load a RGB Matrix from file called name </p>
 
 </div>
 </div>
@@ -347,9 +325,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Print a RGB Matrix </p><ul>
-<li>dm on the console </li>
-</ul>
+<p>Print a RGB Matrix dm on the console </p>
 
 </div>
 </div>
@@ -397,10 +373,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Save a RGB Matrix </p><ul>
-<li>dm to file called </li>
-<li>name </li>
-</ul>
+<p>Save a RGB Matrix dm to file called name </p>
 
 </div>
 </div>
