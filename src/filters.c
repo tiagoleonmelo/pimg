@@ -237,9 +237,9 @@ DynamicMatrix * FilterRGB(DynamicMatrix * gm, int kernel[], int kernel_size)
 
                 if ((x + f) < 0 || (x + f) > gm->x || (y + g) < 0 || (y + g) > gm->y)
                 {
-                    new_red += 0;
-                    new_green += 0;
-                    new_blue += 0;
+                    new_red += 255;
+                    new_green += 255;
+                    new_blue += 255;
                 }
                 else
                 {
@@ -419,7 +419,7 @@ DynamicMatrix * WatermarkRGB(DynamicMatrix * gm, DynamicMatrix * watermark, int 
     {
 
         // Checking if i is within the bounds of the ROI
-        if(RGBChecker(gm, x_start, y_start, x_start + watermark->x + 1, y_start + watermark->y + 1, i))
+        if(RGBChecker(gm, y_start, x_start, y_start + watermark->y + 1, x_start + watermark->x + 1, i))
         {
 
             img_px = img_source[i];

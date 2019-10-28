@@ -137,8 +137,10 @@ int main(void)
 
     // Saturation
 
-    DynamicMatrix * saturated = Saturate(dm, -100);
-    SaveOnFile(saturated, "../res/saturated_lena.ppm");
+
+    DynamicMatrix * arial = LoadFromFile("../res/arial.ppm");
+    DynamicMatrix * saturated = Saturate(arial, -100);
+    SaveOnFile(saturated, "../res/saturated_arial.ppm");
     // PrintMat(saturated);
 
 
@@ -176,7 +178,7 @@ int main(void)
 
     // RGB
     DynamicMatrix * peppers = LoadFromFile("../res/peppers.ppm");
-    DynamicMatrix * chopped_peppers = AccessRegion(peppers, 120, 120, 375, 375);
+    DynamicMatrix * chopped_peppers = AccessRegion(peppers, 100, 120, 375, 400);
     SaveOnFile(chopped_peppers, "../res/chopped_peppers.ppm");
 
     DynamicMatrix * watered_peppers = WatermarkRGB(dm, chopped_peppers, 120, 120);
